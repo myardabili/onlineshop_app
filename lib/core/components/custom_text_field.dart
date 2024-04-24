@@ -15,9 +15,9 @@ class CustomTextField extends StatelessWidget {
     required this.controller,
     required this.label,
     this.onChanged,
-    required this.obscureText,
+    this.obscureText = false,
     this.keyboardType,
-    required this.showLabel,
+    this.showLabel = true,
     this.suffixIcon,
   });
 

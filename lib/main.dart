@@ -2,6 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onlineshop_app/core/router/app_router.dart';
+import 'package:onlineshop_app/features/address/data/datasources/address_remote_datasource.dart';
+import 'package:onlineshop_app/features/address/data/datasources/rajaongkir_remore_datasource.dart';
+import 'package:onlineshop_app/features/address/presentation/bloc/add_address/add_address_bloc.dart';
+import 'package:onlineshop_app/features/address/presentation/bloc/city/city_bloc.dart';
+import 'package:onlineshop_app/features/address/presentation/bloc/get_address/get_address_bloc.dart';
+import 'package:onlineshop_app/features/address/presentation/bloc/province/province_bloc.dart';
+import 'package:onlineshop_app/features/address/presentation/bloc/subdistrict/subdistrict_bloc.dart';
+import 'package:onlineshop_app/features/auth/data/datasource/auth_remote_datasource.dart';
+import 'package:onlineshop_app/features/auth/presentation/bloc/login/login_bloc.dart';
+import 'package:onlineshop_app/features/auth/presentation/bloc/logout/logout_bloc.dart';
 import 'package:onlineshop_app/features/home/data/datasources/category_remote_datasource.dart';
 import 'package:onlineshop_app/features/home/data/datasources/product_remote_datasource.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/all_product/all_product_bloc.dart';
@@ -25,19 +35,41 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => CategoryBloc(CategoryRemoteDatasource()),
+          create: (contex) => CategoryBloc(CategoryRemoteDatasource()),
         ),
         BlocProvider(
-          create: (_) => AllProductBloc(ProductRemoteDatasource()),
+          create: (contex) => AllProductBloc(ProductRemoteDatasource()),
         ),
         BlocProvider(
-          create: (_) => ProductCategoryBloc(ProductRemoteDatasource()),
+          create: (contex) => ProductCategoryBloc(ProductRemoteDatasource()),
         ),
         BlocProvider(
-          create: (_) => CheckoutBloc(),
+          create: (contex) => CheckoutBloc(),
+        ),
+        BlocProvider(
+          create: (contex) => LoginBloc(AuthRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => LogoutBloc(AuthRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => GetAddressBloc(AddressRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => AddAddressBloc(AddressRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => ProvinceBloc(RajaongkirRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => CityBloc(RajaongkirRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => SubdistrictBloc(RajaongkirRemoteDatasource()),
         ),
       ],
       child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primary),
