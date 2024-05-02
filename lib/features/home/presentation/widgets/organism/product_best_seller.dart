@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:onlineshop_app/api/urls.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/all_product/all_product_bloc.dart';
-import 'package:onlineshop_app/features/home/presentation/widgets/circle_loading.dart';
+import 'package:onlineshop_app/core/components/circle_loading.dart';
 
 class ProductBestSeller extends StatefulWidget {
   const ProductBestSeller({super.key});

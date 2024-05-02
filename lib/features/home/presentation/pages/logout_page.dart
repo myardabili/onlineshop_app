@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:onlineshop_app/core/router/app_router.dart';
 import 'package:onlineshop_app/features/auth/presentation/bloc/logout/logout_bloc.dart';
-import 'package:onlineshop_app/features/home/presentation/widgets/circle_loading.dart';
+import 'package:onlineshop_app/core/components/circle_loading.dart';
 
 class LogoutPage extends StatefulWidget {
   const LogoutPage({super.key});

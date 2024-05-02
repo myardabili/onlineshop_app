@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/checkout/checkout_bloc.dart';
-import 'package:onlineshop_app/features/home/presentation/models/product_quantity.dart';
+import 'package:onlineshop_app/features/home/data/models/product_quantity.dart';
 
 import '../../../../api/urls.dart';
 import '../../../../core/components/spaces.dart';

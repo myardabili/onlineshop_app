@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:onlineshop_app/features/auth/data/datasource/auth_local_datasource.dart';
 import 'package:onlineshop_app/features/auth/presentation/bloc/login/login_bloc.dart';
-import 'package:onlineshop_app/features/home/presentation/widgets/circle_loading.dart';
+import 'package:onlineshop_app/core/components/circle_loading.dart';
 
 import '../../../../core/assets/assets.gen.dart';
 import '../../../../core/components/buttons.dart';

@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:onlineshop_app/core/components/components.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/auth/data/datasource/auth_local_datasource.dart';
-import 'package:onlineshop_app/features/home/presentation/models/product_model.dart';
-import 'package:onlineshop_app/features/home/presentation/models/store_model.dart';
-import 'package:onlineshop_app/features/home/presentation/widgets/circle_loading.dart';
+// import 'package:onlineshop_app/features/home/presentation/models/product_model.dart';
+// import 'package:onlineshop_app/features/home/presentation/models/store_model.dart';
+import 'package:onlineshop_app/core/components/circle_loading.dart';
 
 import '../../../../core/assets/assets.gen.dart';
 import '../../../../core/router/app_router.dart';
@@ -18,43 +18,6 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<ProductModel> carts = [
-      ProductModel(
-        images: [
-          Assets.images.products.earphone.path,
-          Assets.images.products.earphone.path,
-          Assets.images.products.earphone.path,
-        ],
-        name: 'Earphone',
-        price: 320000,
-        stock: 20,
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-        store: StoreModel(
-          name: 'CWB Online Store',
-          type: StoreEnum.officialStore,
-          imageUrl: 'https://avatars.githubusercontent.com/u/534678?v=4',
-        ),
-      ),
-      ProductModel(
-        images: [
-          Assets.images.products.sepatu.path,
-          Assets.images.products.sepatu2.path,
-          Assets.images.products.sepatu.path,
-        ],
-        name: 'Sepatu Nike',
-        price: 2200000,
-        stock: 20,
-        description:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ',
-        store: StoreModel(
-          name: 'CWB Online Store',
-          type: StoreEnum.officialStore,
-          imageUrl: 'https://avatars.githubusercontent.com/u/534678?v=4',
-        ),
-      ),
-    ];
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cart'),

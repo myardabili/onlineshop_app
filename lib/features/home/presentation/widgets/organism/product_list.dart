@@ -5,7 +5,7 @@ import 'package:onlineshop_app/core/assets/assets.gen.dart';
 import 'package:onlineshop_app/core/constants/app_colors.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/product_category/product_category_bloc.dart';
-import 'package:onlineshop_app/features/home/presentation/widgets/circle_loading.dart';
+import 'package:onlineshop_app/core/components/circle_loading.dart';
 
 import '../../../../../core/components/spaces.dart';
 import '../../bloc/checkout/checkout_bloc.dart';

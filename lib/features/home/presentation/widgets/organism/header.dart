@@ -5,7 +5,7 @@ import 'package:onlineshop_app/core/assets/assets.gen.dart';
 import 'package:onlineshop_app/core/components/spaces.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:onlineshop_app/core/router/app_router.dart';
-import 'package:onlineshop_app/features/home/presentation/widgets/circle_loading.dart';
+import 'package:onlineshop_app/core/components/circle_loading.dart';
 
 import '../../bloc/checkout/checkout_bloc.dart';
 

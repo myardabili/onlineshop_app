@@ -18,6 +18,10 @@ import 'package:onlineshop_app/features/home/presentation/bloc/all_product/all_p
 import 'package:onlineshop_app/features/home/presentation/bloc/checkout/checkout_bloc.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/category/category_bloc.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/product_category/product_category_bloc.dart';
+import 'package:onlineshop_app/features/orders/data/datasources/cost_remote_datasource.dart';
+import 'package:onlineshop_app/features/orders/data/datasources/order_remote_datasource.dart';
+import 'package:onlineshop_app/features/orders/presentation/bloc/cost/cost_bloc.dart';
+import 'package:onlineshop_app/features/orders/presentation/bloc/order/order_bloc.dart';
 
 import 'core/constants/app_colors.dart';
 
@@ -66,6 +70,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (contex) => SubdistrictBloc(RajaongkirRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => CheckoutBloc(),
+        ),
+        BlocProvider(
+          create: (contex) => CostBloc(CostRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => OrderBloc(OrderRemoteDatasource()),
         ),
       ],
       child: MaterialApp.router(

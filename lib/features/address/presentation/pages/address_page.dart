@@ -8,6 +8,7 @@ import '../../../../core/assets/assets.gen.dart';
 import '../../../../core/components/buttons.dart';
 import '../../../../core/components/spaces.dart';
 import '../../../../core/router/app_router.dart';
+import '../../../home/presentation/bloc/checkout/checkout_bloc.dart';
 import '../widgets/address_tile.dart';
 
 class AddressPage extends StatefulWidget {
@@ -26,31 +27,6 @@ class _AddressPageState extends State<AddressPage> {
 
   @override
   Widget build(BuildContext context) {
-    // final List<AddressModel> addresses = [
-    //   AddressModel(
-    //     country: 'Indonesia',
-    //     firstName: 'Saiful',
-    //     lastName: 'Bahri',
-    //     address: 'Jl. Merdeka No. 123',
-    //     city: 'Jakarta Selatan',
-    //     province: 'DKI Jakarta',
-    //     zipCode: 12345,
-    //     phoneNumber: '08123456789',
-    //     isPrimary: true,
-    //   ),
-    //   AddressModel(
-    //     country: 'Indonesia',
-    //     firstName: 'Saiful',
-    //     lastName: '',
-    //     address: 'Jl. Cendrawasih No. 456',
-    //     city: 'Bandung',
-    //     province: 'Jawa Barat',
-    //     zipCode: 67890,
-    //     phoneNumber: '08987654321',
-    //   ),
-    // ];
-    // int selectedIndex = addresses.indexWhere((element) => element.isPrimary);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Address'),
@@ -86,24 +62,36 @@ class _AddressPageState extends State<AddressPage> {
                 );
               }
               if (state is GetAddressLoaded) {
-                return ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) => AddressTile(
-                    data: state.address[index],
-                    onTap: () {},
-                    onEditTap: () {
-                      context.goNamed(
-                        RouteConstants.editAddress,
-                        pathParameters: PathParameters(
-                          rootTab: RootTab.order,
-                        ).toMap(),
-                        extra: state.address[index],
+                return BlocBuilder<CheckoutBloc, CheckoutState>(
+                  builder: (context, checkoutState) {
+                    if (checkoutState is CheckoutLoaded) {
+                      final addressId = checkoutState.addressId;
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => AddressTile(
+                          isSelected: addressId == state.address[index].id,
+                          data: state.address[index],
+                          onTap: () {
+                            context.read<CheckoutBloc>().add(AddAddressId(
+                                addressId: state.address[index].id!));
+                          },
+                          onEditTap: () {
+                            context.goNamed(
+                              RouteConstants.editAddress,
+                              pathParameters: PathParameters(
+                                rootTab: RootTab.order,
+                              ).toMap(),
+                              extra: state.address[index],
+                            );
+                          },
+                        ),
+                        separatorBuilder: (context, index) =>
+                            const SpaceHeight(height: 16.0),
+                        itemCount: state.address.length,
                       );
-                    },
-                  ),
-                  separatorBuilder: (context, index) =>
-                      const SpaceHeight(height: 16.0),
-                  itemCount: state.address.length,
+                    }
+                    return const SizedBox.shrink();
+                  },
                 );
               }
               return const SizedBox.shrink();
@@ -138,11 +126,28 @@ class _AddressPageState extends State<AddressPage> {
                     fontSize: 16.0,
                   ),
                 ),
-                Text(
-                  20000.currencyFormatRp,
-                  style: const TextStyle(
-                    fontSize: 16.0,
-                  ),
+                BlocBuilder<CheckoutBloc, CheckoutState>(
+                  builder: (context, state) {
+                    if (state is CheckoutLoaded) {
+                      final subtotal = state.items.fold<int>(
+                          0,
+                          (previousValue, element) =>
+                              previousValue +
+                              (element.product!.price! * element.quantity));
+                      return Text(
+                        subtotal.currencyFormatRp,
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                        ),
+                      );
+                    }
+                    return Text(
+                      0.currencyFormatRp,
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
