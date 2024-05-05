@@ -133,7 +133,7 @@ class _AddressPageState extends State<AddressPage> {
                           0,
                           (previousValue, element) =>
                               previousValue +
-                              (element.product!.price! * element.quantity));
+                              (element.product.price! * element.quantity));
                       return Text(
                         subtotal.currencyFormatRp,
                         style: const TextStyle(

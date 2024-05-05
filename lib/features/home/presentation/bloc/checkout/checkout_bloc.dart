@@ -98,6 +98,7 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         event.paymentMethod,
       ));
     });
+
     on<AddShippingService>((event, emit) {
       final currentState = state as CheckoutLoaded;
       emit(CheckoutLoaded(
@@ -109,5 +110,9 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
         currentState.paymentMethod,
       ));
     });
+
+    on<Started>(((event, emit) {
+      emit(const CheckoutLoaded([], 0, '', '', 0, ''));
+    }));
   }
 }

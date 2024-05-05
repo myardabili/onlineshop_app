@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
 import 'package:onlineshop_app/api/urls.dart';
@@ -20,6 +22,24 @@ class OrderRemoteDatasource {
     );
     if (response.statusCode == 200) {
       return Right(OrderModel.fromJson(response.body));
+    } else {
+      return const Left('Error');
+    }
+  }
+
+  Future<Either<String, String>> checkPaymentStatus(int orderId) async {
+    final authData = await AuthLocalDatasource().getAuthData();
+    final response = await http.get(
+      Uri.parse('${URLs.base}/api/order/status/$orderId'),
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json',
+        'Authorization': 'Bearer ${authData!.accessToken}'
+      },
+    );
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return Right(data['status']);
     } else {
       return const Left('Error');
     }

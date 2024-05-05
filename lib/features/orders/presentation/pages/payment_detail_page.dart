@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:onlineshop_app/core/components/circle_loading.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/checkout/checkout_bloc.dart';
 import 'package:onlineshop_app/features/orders/presentation/bloc/order/order_bloc.dart';
@@ -11,7 +12,6 @@ import '../../../../core/components/spaces.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/router/app_router.dart';
 import '../../data/models/bank_account_model.dart';
-import '../widgets/countdown_timer.dart';
 import '../widgets/payment_method.dart';
 
 class PaymentDetailPage extends StatelessWidget {
@@ -188,23 +188,6 @@ class PaymentDetailPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
-          // Row(
-          //   children: [
-          //     const Icon(Icons.schedule),
-          //     const SpaceWidth(width: 12.0),
-          //     const Flexible(
-          //       child: Text(
-          //         'Selesaikan Pembayaran Dalam',
-          //         overflow: TextOverflow.ellipsis,
-          //       ),
-          //     ),
-          //     const SpaceWidth(width: 12.0),
-          //     CountdownTimer(
-          //       minute: 120,
-          //       onTimerCompletion: () {},
-          //     ),
-          //   ],
-          // ),
           const SpaceHeight(height: 30.0),
           Row(
             children: [
@@ -379,6 +362,7 @@ class PaymentDetailPage extends StatelessWidget {
                       context.pushNamed(
                         RouteConstants.paymentWaiting,
                         pathParameters: PathParameters().toMap(),
+                        extra: orderState.orderModel.order!.id!,
                       );
                     }
                     if (orderState is OrderFailure) {
@@ -388,19 +372,26 @@ class PaymentDetailPage extends StatelessWidget {
                       ));
                     }
                   },
-                  child: Button.filled(
-                    disabled: paymentMethod == '',
-                    onPressed: () {
-                      context.read<OrderBloc>().add(OnOrder(
-                            addressId: state.addressId,
-                            paymentMethod: paymentMethod,
-                            shippingService: state.shippingService,
-                            shippingCost: state.shippingCost,
-                            paymentVaName: state.paymentVaName,
-                            products: state.items,
-                          ));
+                  child: BlocBuilder<OrderBloc, OrderState>(
+                    builder: (context, orderState) {
+                      if (orderState is OrderLoading) {
+                        return const CircleLoading();
+                      }
+                      return Button.filled(
+                        disabled: paymentMethod == '',
+                        onPressed: () {
+                          context.read<OrderBloc>().add(OnOrder(
+                                addressId: state.addressId,
+                                paymentMethod: paymentMethod,
+                                shippingService: state.shippingService,
+                                shippingCost: state.shippingCost,
+                                paymentVaName: state.paymentVaName,
+                                products: state.items,
+                              ));
+                        },
+                        label: 'Bayar Sekarang',
+                      );
                     },
-                    label: 'Bayar Sekarang',
                   ),
                 );
               }

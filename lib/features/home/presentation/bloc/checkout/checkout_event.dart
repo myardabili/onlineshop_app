@@ -8,6 +8,8 @@ sealed class CheckoutEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class Started extends CheckoutEvent {}
+
 class AddItem extends CheckoutEvent {
   final Product item;
 

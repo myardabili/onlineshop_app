@@ -12,6 +12,7 @@ import 'package:onlineshop_app/features/address/presentation/bloc/subdistrict/su
 import 'package:onlineshop_app/features/auth/data/datasource/auth_remote_datasource.dart';
 import 'package:onlineshop_app/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:onlineshop_app/features/auth/presentation/bloc/logout/logout_bloc.dart';
+import 'package:onlineshop_app/features/firebase_messaging/firebase_messaging_remote_datasource.dart';
 import 'package:onlineshop_app/features/home/data/datasources/category_remote_datasource.dart';
 import 'package:onlineshop_app/features/home/data/datasources/product_remote_datasource.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/all_product/all_product_bloc.dart';
@@ -20,12 +21,21 @@ import 'package:onlineshop_app/features/home/presentation/bloc/category/category
 import 'package:onlineshop_app/features/home/presentation/bloc/product_category/product_category_bloc.dart';
 import 'package:onlineshop_app/features/orders/data/datasources/cost_remote_datasource.dart';
 import 'package:onlineshop_app/features/orders/data/datasources/order_remote_datasource.dart';
+import 'package:onlineshop_app/features/orders/presentation/bloc/check_payment_status/check_payment_status_bloc.dart';
 import 'package:onlineshop_app/features/orders/presentation/bloc/cost/cost_bloc.dart';
 import 'package:onlineshop_app/features/orders/presentation/bloc/order/order_bloc.dart';
 
 import 'core/constants/app_colors.dart';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await FirebaseMessagingRemoteDatasource().initialize();
   runApp(const MyApp());
 }
 
@@ -79,6 +89,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (contex) => OrderBloc(OrderRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => CheckPaymentStatusBloc(OrderRemoteDatasource()),
         ),
       ],
       child: MaterialApp.router(

@@ -33,9 +33,12 @@ dependencies:
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1
   equatable: ^2.0.5
+  firebase_core: ^2.30.1
+  firebase_messaging: ^14.9.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.4
+  flutter_local_notifications: ^17.1.1
   flutter_slidable: ^3.0.1
   flutter_svg: ^2.0.10+1
   get_it: ^7.6.4
