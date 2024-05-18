@@ -10,6 +10,7 @@ import '../../../../core/components/buttons.dart';
 import '../../../../core/components/spaces.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/router/app_router.dart';
+import '../../../firebase_messaging/firebase_messaging_remote_datasource.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -80,13 +81,14 @@ class _LoginPageState extends State<LoginPage> {
           ),
           const SpaceHeight(height: 50.0),
           BlocConsumer<LoginBloc, LoginState>(
-            listener: (context, state) {
+            listener: (context, state) async {
               if (state is LoginFailure) {
                 ScaffoldMessenger.of(context)
                     .showSnackBar(SnackBar(content: Text(state.message)));
               }
               if (state is LoginLoaded) {
                 AuthLocalDatasource().saveAuthData(state.data);
+                await FirebaseMessagingRemoteDatasource().initialize();
                 context.goNamed(
                   RouteConstants.root,
                   pathParameters: PathParameters().toMap(),

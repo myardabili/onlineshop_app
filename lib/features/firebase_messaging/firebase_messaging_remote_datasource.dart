@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:onlineshop_app/features/auth/data/datasource/auth_local_datasource.dart';
+import 'package:onlineshop_app/features/auth/data/datasource/auth_remote_datasource.dart';
 
 class FirebaseMessagingRemoteDatasource {
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
@@ -35,6 +37,10 @@ class FirebaseMessagingRemoteDatasource {
     final fcmToken = await _firebaseMessaging.getToken();
 
     print('Token: $fcmToken');
+
+    if (await AuthLocalDatasource().isAuth()) {
+      AuthRemoteDatasource().updateFcmToken(fcmToken!);
+    }
 
     FirebaseMessaging.instance.getInitialMessage();
     FirebaseMessaging.onMessage.listen((message) {

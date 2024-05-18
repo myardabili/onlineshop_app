@@ -15,6 +15,9 @@ import '../../features/orders/presentation/pages/cart_page.dart';
 import '../../features/orders/presentation/pages/order_detail_page.dart';
 import '../../features/orders/presentation/pages/payment_detail_page.dart';
 import '../../features/orders/presentation/pages/payment_waiting_page.dart';
+import '../../features/profile/presentation/pages/history_order_page.dart';
+import '../../features/profile/presentation/pages/shipping_detail_page.dart';
+import '../../features/profile/presentation/pages/tracking_order_page.dart';
 
 // import '../../presentation/address/models/address_model.dart';
 // import '../../presentation/address/pages/add_address_page.dart';
@@ -89,6 +92,11 @@ class AppRouter {
         },
         routes: [
           GoRoute(
+            name: RouteConstants.orderList,
+            path: RouteConstants.orderListPath,
+            builder: (context, state) => const HistoryOrderPage(),
+          ),
+          GoRoute(
               name: RouteConstants.cart,
               path: RouteConstants.cartPath,
               builder: (context, state) => const CartPage(),
@@ -112,6 +120,28 @@ class AppRouter {
                               orderId: args,
                             );
                           },
+                        ),
+                        GoRoute(
+                          name: RouteConstants.trackingOrder,
+                          path: RouteConstants.trackingOrderPath,
+                          builder: (context, state) {
+                            final args = state.extra as int;
+                            return TrackingOrderPage(
+                              orderId: args,
+                            );
+                          },
+                          routes: [
+                            GoRoute(
+                              name: RouteConstants.shippingDetail,
+                              path: RouteConstants.shippingDetailPath,
+                              builder: (context, state) {
+                                final args = state.extra as String;
+                                return ShippingDetailPage(
+                                  resi: args,
+                                );
+                              },
+                            ),
+                          ],
                         ),
                       ],
                       //     routes: [

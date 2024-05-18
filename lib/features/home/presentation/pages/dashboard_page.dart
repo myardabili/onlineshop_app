@@ -1,15 +1,10 @@
-// import 'package:fic12_flutter_starter/presentation/account/pages/account_page.dart';
 import 'package:flutter/material.dart';
-import 'package:onlineshop_app/features/home/presentation/pages/logout_page.dart';
+import 'package:onlineshop_app/features/profile/presentation/pages/profile_page.dart';
 
 import '../../../../core/assets/assets.gen.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../orders/presentation/pages/cart_page.dart';
 import 'home_page.dart';
-// import '../../../core/assets/assets.gen.dart';
-// import '../../../core/constants/colors.dart';
-// import '../../orders/pages/cart_page.dart';
-// import 'home_page.dart';
 
 class DashboardPage extends StatefulWidget {
   final int currentTab;
@@ -26,19 +21,11 @@ class _DashboardPageState extends State<DashboardPage> {
   late int _selectedIndex;
   final List<Widget> _pages = [
     const HomePage(),
-    // const SearchPage(),
-    // const Center(
-    //   child: Text('This Page 1'),
-    // ),
     const Center(
       child: Text('This Page 2'),
     ),
     const CartPage(),
-    // const Center(
-    //   child: Text('This Page 3'),
-    // ),
-    const LogoutPage(),
-    // const AccountPage(),
+    const ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -60,6 +47,8 @@ class _DashboardPageState extends State<DashboardPage> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         selectedItemColor: AppColors.primary,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         onTap: _onItemTapped,
         items: [
           BottomNavigationBarItem(
@@ -100,7 +89,7 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
             ),
             activeIcon: Assets.icons.person.svg(),
-            label: 'ACCOUNT',
+            label: 'PROFILE',
           ),
         ],
       ),

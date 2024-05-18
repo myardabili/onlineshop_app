@@ -49,11 +49,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        bottom: const PreferredSize(
+          preferredSize: Size.fromHeight(20),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+            child: Header(),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           children: [
-            const Header(),
+            // const Header(),
             const SpaceHeight(height: 30.0),
             SearchInput(
               controller: searchController,

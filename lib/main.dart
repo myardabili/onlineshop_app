@@ -24,6 +24,10 @@ import 'package:onlineshop_app/features/orders/data/datasources/order_remote_dat
 import 'package:onlineshop_app/features/orders/presentation/bloc/check_payment_status/check_payment_status_bloc.dart';
 import 'package:onlineshop_app/features/orders/presentation/bloc/cost/cost_bloc.dart';
 import 'package:onlineshop_app/features/orders/presentation/bloc/order/order_bloc.dart';
+import 'package:onlineshop_app/features/profile/data/datasources/history_order_remote_datasource.dart';
+import 'package:onlineshop_app/features/profile/presentation/bloc/history_order/history_order_bloc.dart';
+import 'package:onlineshop_app/features/profile/presentation/bloc/order_detail/order_detail_bloc.dart';
+import 'package:onlineshop_app/features/profile/presentation/bloc/tracking/tracking_bloc.dart';
 
 import 'core/constants/app_colors.dart';
 
@@ -92,6 +96,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (contex) => CheckPaymentStatusBloc(OrderRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => HistoryOrderBloc(HistoryOrderRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => OrderDetailBloc(HistoryOrderRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => TrackingBloc(HistoryOrderRemoteDatasource()),
         ),
       ],
       child: MaterialApp.router(

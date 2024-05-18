@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:onlineshop_app/core/components/components.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/auth/data/datasource/auth_local_datasource.dart';
-// import 'package:onlineshop_app/features/home/presentation/models/product_model.dart';
-// import 'package:onlineshop_app/features/home/presentation/models/store_model.dart';
 import 'package:onlineshop_app/core/components/circle_loading.dart';
 
 import '../../../../core/assets/assets.gen.dart';
