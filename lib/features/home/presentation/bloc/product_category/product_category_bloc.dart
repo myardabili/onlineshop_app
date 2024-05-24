@@ -12,7 +12,7 @@ class ProductCategoryBloc
   ProductCategoryBloc(this._datasource) : super(ProductCategoryInitial()) {
     on<OnGetProductCategory>((event, emit) async {
       emit(ProductCategoryLoading());
-      final result = await _datasource.productCategory(2);
+      final result = await _datasource.productCategory(event.categoryId);
       result.fold(
         (failure) => emit(ProductCategoryFailure(message: failure)),
         (data) => emit(ProductCategoryLoaded(product: data.data!.data!)),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../../core/router/app_router.dart';
 import '../../bloc/category/category_bloc.dart';
 import '../category_button.dart';
 
@@ -41,7 +43,13 @@ class _MenuCategoriesState extends State<MenuCategories> {
                 return CategoryButton(
                   imagePath: state.category[index].image ?? '',
                   label: state.category[index].name ?? '',
-                  onPressed: () {},
+                  onPressed: () {
+                    context.pushNamed(
+                      RouteConstants.productCategory,
+                      pathParameters: PathParameters().toMap(),
+                      extra: state.category[index].id,
+                    );
+                  },
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(width: 16),
@@ -49,38 +57,6 @@ class _MenuCategoriesState extends State<MenuCategories> {
           );
         }
         return const SizedBox.shrink();
-        // return Row(
-        //   children: [
-        //     Flexible(
-        //       child: CategoryButton(
-        //         imagePath: Assets.images.categories.menuBestseller.path,
-        //         label: 'Bestseller',
-        //         onPressed: () {},
-        //       ),
-        //     ),
-        //     Flexible(
-        //       child: CategoryButton(
-        //         imagePath: Assets.images.categories.menuFlashsale.path,
-        //         label: 'Flashsale',
-        //         onPressed: () {},
-        //       ),
-        //     ),
-        //     Flexible(
-        //       child: CategoryButton(
-        //         imagePath: Assets.images.categories.menuToprated.path,
-        //         label: 'Toprated',
-        //         onPressed: () {},
-        //       ),
-        //     ),
-        //     Flexible(
-        //       child: CategoryButton(
-        //         imagePath: Assets.images.categories.menuMore.path,
-        //         label: 'More',
-        //         onPressed: () {},
-        //       ),
-        //     ),
-        //   ],
-        // );
       },
     );
   }

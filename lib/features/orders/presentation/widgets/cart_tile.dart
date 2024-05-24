@@ -57,12 +57,15 @@ class CartTile extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        data.product.name!,
-                        style: const TextStyle(
-                          fontSize: 16,
+                      SizedBox(
+                        width: 200,
+                        child: Text(
+                          data.product.name!,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 16,
+                          ),
                         ),
-                        overflow: TextOverflow.ellipsis,
                       ),
                       Row(
                         children: [

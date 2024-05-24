@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onlineshop_app/features/home/data/models/product_model.dart';
+import 'package:onlineshop_app/features/home/data/models/product_detail_model.dart';
 import 'package:onlineshop_app/features/home/data/models/product_quantity.dart';
 
 part 'checkout_event.dart';

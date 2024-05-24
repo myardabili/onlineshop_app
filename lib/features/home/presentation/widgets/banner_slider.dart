@@ -10,7 +10,7 @@ class BannerSlider extends StatefulWidget {
 }
 
 class _BannerSliderState extends State<BannerSlider> {
-  // int _current = 0;
+  int _current = 0;
   final CarouselController _controller = CarouselController();
 
   @override
@@ -31,32 +31,34 @@ class _BannerSliderState extends State<BannerSlider> {
             autoPlay: true,
             aspectRatio: 315 / 152,
             viewportFraction: 1,
+            disableCenter: true,
+            enlargeCenterPage: true,
             onPageChanged: (index, reason) {
-              // _current = index;
+              _current = index;
               setState(() {});
             },
           ),
         ),
-        // const SpaceHeight(height: 22.0),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: widget.items.asMap().entries.map((entry) {
-        //     return GestureDetector(
-        //       onTap: () => _controller.animateToPage(entry.key),
-        //       child: Container(
-        //         width: _current == entry.key ? 20.0 : 8.0,
-        //         height: 8.0,
-        //         margin: const EdgeInsets.symmetric(horizontal: 4.0),
-        //         decoration: BoxDecoration(
-        //             borderRadius: BorderRadius.circular(30.0),
-        //             color: (Theme.of(context).brightness == Brightness.dark
-        //                     ? AppColors.grey
-        //                     : AppColors.primary)
-        //                 .withOpacity(_current == entry.key ? 0.9 : 0.4)),
-        //       ),
-        //     );
-        //   }).toList(),
-        // ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: widget.items.asMap().entries.map((entry) {
+            return GestureDetector(
+              onTap: () => _controller.animateToPage(entry.key),
+              child: Container(
+                width: 8.0,
+                height: 8.0,
+                margin:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: (Theme.of(context).brightness == Brightness.dark
+                            ? Colors.white
+                            : Colors.black)
+                        .withOpacity(_current == entry.key ? 0.9 : 0.4)),
+              ),
+            );
+          }).toList(),
+        ),
       ],
     );
   }

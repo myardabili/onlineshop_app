@@ -11,7 +11,7 @@ sealed class CheckoutEvent extends Equatable {
 class Started extends CheckoutEvent {}
 
 class AddItem extends CheckoutEvent {
-  final Product item;
+  final Data item;
 
   const AddItem({required this.item});
 
@@ -20,7 +20,7 @@ class AddItem extends CheckoutEvent {
 }
 
 class RemoveItem extends CheckoutEvent {
-  final Product item;
+  final Data item;
 
   const RemoveItem({required this.item});
 

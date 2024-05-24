@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:onlineshop_app/features/home/data/models/product_model.dart';
+
+import 'package:onlineshop_app/features/home/data/models/product_detail_model.dart';
 
 class ProductQuantity {
-  Product product;
+  Data product;
   int quantity;
   ProductQuantity({
     required this.product,
@@ -24,7 +25,7 @@ class ProductQuantity {
       'ProductQuantity(product: $product, quantity: $quantity)';
 
   ProductQuantity copyWith({
-    Product? product,
+    Data? product,
     int? quantity,
   }) {
     return ProductQuantity(

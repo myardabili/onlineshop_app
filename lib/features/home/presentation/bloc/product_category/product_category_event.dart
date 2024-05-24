@@ -8,10 +8,10 @@ sealed class ProductCategoryEvent extends Equatable {
 }
 
 class OnGetProductCategory extends ProductCategoryEvent {
-  // final int categoryId;
+  final int categoryId;
 
-  // const OnGetProductCategory({required this.categoryId});
+  const OnGetProductCategory({required this.categoryId});
 
-  // @override
-  // List<Object> get props => [categoryId];
+  @override
+  List<Object> get props => [categoryId];
 }

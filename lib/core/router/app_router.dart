@@ -1,7 +1,7 @@
-// import 'package:fic12_flutter_starter/presentation/home/pages/dashboard_page.dart';
-// import 'package:fic12_flutter_starter/presentation/orders/pages/history_order_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:onlineshop_app/features/home/presentation/pages/product_category_page.dart';
+import 'package:onlineshop_app/features/home/presentation/pages/product_detail_page.dart';
 
 import '../../features/address/presentation/models/address_model.dart';
 import '../../features/address/presentation/pages/add_address_page.dart';
@@ -18,37 +18,6 @@ import '../../features/orders/presentation/pages/payment_waiting_page.dart';
 import '../../features/profile/presentation/pages/history_order_page.dart';
 import '../../features/profile/presentation/pages/shipping_detail_page.dart';
 import '../../features/profile/presentation/pages/tracking_order_page.dart';
-
-// import '../../presentation/address/models/address_model.dart';
-// import '../../presentation/address/pages/add_address_page.dart';
-// import '../../presentation/address/pages/address_page.dart';
-// import '../../presentation/address/pages/edit_address_page.dart';
-// import '../../presentation/auth/pages/login_page.dart';
-// import '../../presentation/auth/pages/register_page.dart';
-// import '../../presentation/intro/splash_page.dart';
-// import '../../presentation/orders/pages/cart_page.dart';
-// import '../../presentation/orders/pages/order_detail_page.dart';
-// import '../../presentation/orders/pages/payment_detail_page.dart';
-// import '../../presentation/orders/pages/payment_waiting_page.dart';
-// import '../../presentation/orders/pages/shipping_detail_page.dart';
-// import '../../presentation/orders/pages/tracking_order_page.dart';
-
-// import '../../../ui/address/models/address_model.dart';
-// import '../../../ui/address/pages/add_address_page.dart';
-// import '../../../ui/address/pages/address_page.dart';
-// import '../../../ui/address/pages/edit_address_page.dart';
-// import '../../../ui/auth/pages/login_page.dart';
-// import '../../../ui/auth/pages/register_page.dart';
-// import '../../../ui/auth/pages/verification_page.dart';
-// import '../../../ui/home/models/product_model.dart';
-// import '../../../ui/home/pages/product_detail_page.dart';
-// import '../../../ui/home/pages/root_page.dart';
-// import '../../../ui/intro/splash_page.dart';
-// import '../../../ui/orders/pages/cart_page.dart';
-// import '../../../ui/orders/pages/order_detail_page.dart';
-// import '../../../ui/orders/pages/payment_detail_page.dart';
-// import '../../../ui/orders/pages/shipping_detail_page.dart';
-// import '../../../ui/orders/pages/tracking_order_page.dart';
 
 part 'route_constants.dart';
 part 'enums/root_tab.dart';
@@ -92,9 +61,24 @@ class AppRouter {
         },
         routes: [
           GoRoute(
+              name: RouteConstants.productCategory,
+              path: RouteConstants.productCategoryPath,
+              builder: (context, state) {
+                final args = state.extra as int;
+                return ProductCategoryPage(categoryId: args);
+              }),
+          GoRoute(
             name: RouteConstants.orderList,
             path: RouteConstants.orderListPath,
             builder: (context, state) => const HistoryOrderPage(),
+          ),
+          GoRoute(
+            name: RouteConstants.productDetail,
+            path: RouteConstants.productDetailPath,
+            builder: (context, state) {
+              final args = state.extra as int;
+              return ProductDetailPage(productId: args);
+            },
           ),
           GoRoute(
               name: RouteConstants.cart,
