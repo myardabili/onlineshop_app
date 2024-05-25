@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:onlineshop_app/features/home/presentation/pages/search_product_page.dart';
 import 'package:onlineshop_app/features/profile/presentation/pages/profile_page.dart';
 
 import '../../../../core/assets/assets.gen.dart';
@@ -21,9 +22,7 @@ class _DashboardPageState extends State<DashboardPage> {
   late int _selectedIndex;
   final List<Widget> _pages = [
     const HomePage(),
-    const Center(
-      child: Text('This Page 2'),
-    ),
+    const SearchProductPage(query: ''),
     const CartPage(),
     const ProfilePage(),
   ];
@@ -47,8 +46,8 @@ class _DashboardPageState extends State<DashboardPage> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
         selectedItemColor: AppColors.primary,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
+        // showSelectedLabels: false,
+        // showUnselectedLabels: false,
         onTap: _onItemTapped,
         items: [
           BottomNavigationBarItem(
@@ -58,8 +57,13 @@ class _DashboardPageState extends State<DashboardPage> {
                 BlendMode.srcIn,
               ),
             ),
-            activeIcon: Assets.icons.home.svg(),
-            label: 'HOME',
+            activeIcon: Assets.icons.home.svg(
+              colorFilter: const ColorFilter.mode(
+                AppColors.primary,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Assets.icons.search.svg(
@@ -68,8 +72,13 @@ class _DashboardPageState extends State<DashboardPage> {
                 BlendMode.srcIn,
               ),
             ),
-            activeIcon: Assets.icons.search.svg(),
-            label: 'EXPLORE',
+            activeIcon: Assets.icons.search.svg(
+              colorFilter: const ColorFilter.mode(
+                AppColors.primary,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Search',
           ),
           BottomNavigationBarItem(
             icon: Assets.icons.order.svg(
@@ -78,8 +87,13 @@ class _DashboardPageState extends State<DashboardPage> {
                 BlendMode.srcIn,
               ),
             ),
-            activeIcon: Assets.icons.order.svg(),
-            label: 'ORDER',
+            activeIcon: Assets.icons.order.svg(
+              colorFilter: const ColorFilter.mode(
+                AppColors.primary,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Order',
           ),
           BottomNavigationBarItem(
             icon: Assets.icons.person.svg(
@@ -88,8 +102,13 @@ class _DashboardPageState extends State<DashboardPage> {
                 BlendMode.srcIn,
               ),
             ),
-            activeIcon: Assets.icons.person.svg(),
-            label: 'PROFILE',
+            activeIcon: Assets.icons.person.svg(
+              colorFilter: const ColorFilter.mode(
+                AppColors.primary,
+                BlendMode.srcIn,
+              ),
+            ),
+            label: 'Profile',
           ),
         ],
       ),

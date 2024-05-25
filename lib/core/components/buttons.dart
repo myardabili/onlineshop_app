@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../constants/app_colors.dart';
 
@@ -62,19 +63,15 @@ class Button extends StatelessWidget {
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),
               ),
-              child: Row(
-                children: [
-                  icon ?? const SizedBox.shrink(),
-                  if (icon != null) const SizedBox(width: 10),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  )
-                ],
+              child: Center(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: fontSize,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             )
           : OutlinedButton(
@@ -86,20 +83,15 @@ class Button extends StatelessWidget {
                   borderRadius: BorderRadius.circular(borderRadius),
                 ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  icon ?? const SizedBox.shrink(),
-                  if (icon != null) const SizedBox(width: 10.0),
-                  Text(
-                    label,
-                    style: TextStyle(
-                      color: textColor,
-                      fontSize: fontSize,
-                      fontWeight: FontWeight.w600,
-                    ),
+              child: Center(
+                child: Text(
+                  label,
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: fontSize,
+                    fontWeight: FontWeight.w600,
                   ),
-                ],
+                ),
               ),
             ),
     );

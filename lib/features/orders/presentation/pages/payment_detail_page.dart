@@ -31,19 +31,10 @@ class PaymentDetailPage extends StatelessWidget {
         backgroundColor: AppColors.white,
         builder: (BuildContext context) {
           return Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 20.0, vertical: 14.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(40.0)),
-                  child: ColoredBox(
-                    color: AppColors.light,
-                    child: SizedBox(height: 8.0, width: 55.0),
-                  ),
-                ),
-                const SpaceHeight(height: 20.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -316,98 +307,107 @@ class PaymentDetailPage extends StatelessWidget {
           const SpaceHeight(height: 8.0),
           const Divider(),
           const SpaceHeight(height: 24.0),
-          Row(
-            children: [
-              const Text(
-                'Total Tagihan',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
+        ],
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        height: 120,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                const Text(
+                  'Total Tagihan',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              BlocBuilder<CheckoutBloc, CheckoutState>(
-                builder: (context, state) {
-                  if (state is CheckoutLoaded) {
-                    final total = state.items.fold<int>(
-                            0,
-                            (previousValue, element) =>
-                                previousValue +
-                                (element.product.price! * element.quantity)) +
-                        state.shippingCost;
+                const Spacer(),
+                BlocBuilder<CheckoutBloc, CheckoutState>(
+                  builder: (context, state) {
+                    if (state is CheckoutLoaded) {
+                      final total = state.items.fold<int>(
+                              0,
+                              (previousValue, element) =>
+                                  previousValue +
+                                  (element.product.price! * element.quantity)) +
+                          state.shippingCost;
+                      return Text(
+                        total.currencyFormatRp,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
+                    }
                     return Text(
-                      total.currencyFormatRp,
+                      0.currencyFormatRp,
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                       ),
                     );
-                  }
-                  return Text(
-                    0.currencyFormatRp,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
+                  },
+                ),
+              ],
+            ),
+            const SpaceHeight(height: 20.0),
+            BlocBuilder<CheckoutBloc, CheckoutState>(
+              builder: (context, state) {
+                if (state is CheckoutLoaded) {
+                  final paymentMethod = state.paymentMethod;
+                  return BlocListener<OrderBloc, OrderState>(
+                    listener: (context, orderState) {
+                      if (orderState is OrderLoaded) {
+                        context.pushNamed(
+                          RouteConstants.paymentWaiting,
+                          pathParameters: PathParameters().toMap(),
+                          extra: orderState.orderModel.order!.id!,
+                        );
+                      }
+                      if (orderState is OrderFailure) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: AppColors.red,
+                          content: Text(orderState.message),
+                        ));
+                      }
+                    },
+                    child: BlocBuilder<OrderBloc, OrderState>(
+                      builder: (context, orderState) {
+                        if (orderState is OrderLoading) {
+                          return const CircleLoading();
+                        }
+                        return Button.filled(
+                          disabled: paymentMethod == '',
+                          onPressed: () {
+                            context.read<OrderBloc>().add(OnOrder(
+                                  addressId: state.addressId,
+                                  paymentMethod: paymentMethod,
+                                  shippingService: state.shippingService,
+                                  shippingCost: state.shippingCost,
+                                  paymentVaName: state.paymentVaName,
+                                  products: state.items,
+                                ));
+                          },
+                          label: 'Bayar Sekarang',
+                        );
+                      },
                     ),
                   );
-                },
-              ),
-            ],
-          ),
-          const SpaceHeight(height: 20.0),
-          BlocBuilder<CheckoutBloc, CheckoutState>(
-            builder: (context, state) {
-              if (state is CheckoutLoaded) {
-                final paymentMethod = state.paymentMethod;
-                return BlocListener<OrderBloc, OrderState>(
-                  listener: (context, orderState) {
-                    if (orderState is OrderLoaded) {
-                      context.pushNamed(
-                        RouteConstants.paymentWaiting,
-                        pathParameters: PathParameters().toMap(),
-                        extra: orderState.orderModel.order!.id!,
-                      );
-                    }
-                    if (orderState is OrderFailure) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: AppColors.red,
-                        content: Text(orderState.message),
-                      ));
-                    }
+                }
+                return Button.filled(
+                  disabled: false,
+                  onPressed: () {
+                    context.pushNamed(
+                      RouteConstants.paymentWaiting,
+                      pathParameters: PathParameters().toMap(),
+                    );
                   },
-                  child: BlocBuilder<OrderBloc, OrderState>(
-                    builder: (context, orderState) {
-                      if (orderState is OrderLoading) {
-                        return const CircleLoading();
-                      }
-                      return Button.filled(
-                        disabled: paymentMethod == '',
-                        onPressed: () {
-                          context.read<OrderBloc>().add(OnOrder(
-                                addressId: state.addressId,
-                                paymentMethod: paymentMethod,
-                                shippingService: state.shippingService,
-                                shippingCost: state.shippingCost,
-                                paymentVaName: state.paymentVaName,
-                                products: state.items,
-                              ));
-                        },
-                        label: 'Bayar Sekarang',
-                      );
-                    },
-                  ),
+                  label: 'Bayar Sekarang',
                 );
-              }
-              return Button.filled(
-                disabled: false,
-                onPressed: () {
-                  context.pushNamed(
-                    RouteConstants.paymentWaiting,
-                    pathParameters: PathParameters().toMap(),
-                  );
-                },
-                label: 'Bayar Sekarang',
-              );
-            },
-          ),
-        ],
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

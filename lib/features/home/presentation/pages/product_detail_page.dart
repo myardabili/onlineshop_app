@@ -50,7 +50,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         centerTitle: true,
         title: const Text(
           'Detail',
@@ -58,16 +57,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
             fontSize: 16,
             fontWeight: FontWeight.w600,
             color: Colors.black,
-          ),
-        ),
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 20.0),
-          child: IconButton(
-            onPressed: () => Navigator.pop(context),
-            icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-            ),
           ),
         ),
         actions: [
@@ -135,86 +124,94 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           return const SizedBox();
         },
       ),
-      bottomNavigationBar: Container(
-        height: 80,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-            builder: (context, state) {
-              if (state is ProductDetailLoading) {
-                return const Center(
-                  child: CircleLoading(),
-                );
-              }
-              if (state is ProductDetailLoaded) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+      bottomNavigationBar: _bottomNavbar(),
+    );
+  }
+
+  Widget _bottomNavbar() {
+    return Container(
+      height: 80,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+      child: _buttonNavbarItem(),
+    );
+  }
+
+  Widget _buttonNavbarItem() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+        builder: (context, state) {
+          if (state is ProductDetailLoading) {
+            return const Center(
+              child: CircleLoading(),
+            );
+          }
+          if (state is ProductDetailLoaded) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Price',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        Text(
-                          state.product.price!.currencyFormatRp,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
+                    const Text(
+                      'Price',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                      ),
                     ),
-                    SizedBox(
-                      height: 50,
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          context
-                              .read<CheckoutBloc>()
-                              .add(AddItem(item: state.product));
-                        },
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            )),
-                        child: const Text(
-                          'Add to cart',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                    Text(
+                      state.product.price!.currencyFormatRp,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
                       ),
                     ),
                   ],
-                );
-              }
-              return const SizedBox();
-            },
-          ),
-        ),
+                ),
+                SizedBox(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context
+                          .read<CheckoutBloc>()
+                          .add(AddItem(item: state.product));
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        )),
+                    child: const Text(
+                      'Add to cart',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
+          return const SizedBox();
+        },
       ),
     );
   }
@@ -228,14 +225,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              state.product.name!,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SpaceHeight(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -256,6 +245,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ),
                 ),
               ],
+            ),
+            const SpaceHeight(height: 8.0),
+            Text(
+              state.product.name!,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             const SpaceHeight(height: 30.0),
             const Text(

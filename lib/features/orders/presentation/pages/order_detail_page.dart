@@ -153,52 +153,61 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           const SpaceHeight(height: 8.0),
           const Divider(),
           const SpaceHeight(height: 24.0),
-          Row(
-            children: [
-              const Text(
-                'Total Belanja',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
+        ],
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        height: 120,
+        width: MediaQuery.of(context).size.width,
+        child: Column(
+          children: [
+            Row(
+              children: [
+                const Text(
+                  'Total Belanja',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
-              ),
-              const Spacer(),
-              BlocBuilder<CheckoutBloc, CheckoutState>(
-                builder: (context, state) {
-                  if (state is CheckoutLoaded) {
-                    final total = state.items.fold<int>(
-                            0,
-                            (previousValue, element) =>
-                                previousValue +
-                                (element.product.price! * element.quantity)) +
-                        state.shippingCost;
+                const Spacer(),
+                BlocBuilder<CheckoutBloc, CheckoutState>(
+                  builder: (context, state) {
+                    if (state is CheckoutLoaded) {
+                      final total = state.items.fold<int>(
+                              0,
+                              (previousValue, element) =>
+                                  previousValue +
+                                  (element.product.price! * element.quantity)) +
+                          state.shippingCost;
+                      return Text(
+                        total.currencyFormatRp,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
+                    }
                     return Text(
-                      total.currencyFormatRp,
+                      0.currencyFormatRp,
                       style: const TextStyle(
                         fontWeight: FontWeight.w600,
                       ),
                     );
-                  }
-                  return Text(
-                    0.currencyFormatRp,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-          const SpaceHeight(height: 20.0),
-          Button.filled(
-            onPressed: () {
-              context.goNamed(
-                RouteConstants.paymentDetail,
-                pathParameters: PathParameters().toMap(),
-              );
-            },
-            label: 'Pilih Pembayaran',
-          ),
-        ],
+                  },
+                ),
+              ],
+            ),
+            const SpaceHeight(height: 20.0),
+            Button.filled(
+              onPressed: () {
+                context.goNamed(
+                  RouteConstants.paymentDetail,
+                  pathParameters: PathParameters().toMap(),
+                );
+              },
+              label: 'Pilih Pembayaran',
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/all_product/all_product_bloc.dart';
 import 'package:onlineshop_app/features/home/presentation/widgets/organism/header.dart';
 import 'package:onlineshop_app/features/home/presentation/widgets/organism/product_list.dart';
 
 import '../../../../core/assets/assets.gen.dart';
-import '../../../../core/components/search_input.dart';
 import '../../../../core/components/spaces.dart';
-import '../../../../core/router/app_router.dart';
 import '../widgets/banner_slider.dart';
 import '../widgets/organism/menu_categories.dart';
 
@@ -49,6 +47,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(20),
           child: Padding(
@@ -61,20 +61,6 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            // const Header(),
-            // const SpaceHeight(height: 30.0),
-            // SearchInput(
-            //   controller: searchController,
-            //   onTap: () {
-            //     context.pushReplacementNamed(
-            //       RouteConstants.root,
-            //       pathParameters: PathParameters(
-            //         rootTab: RootTab.explore,
-            //       ).toMap(),
-            //     );
-            //   },
-            // ),
-
             BannerSlider(items: banners2),
             const SpaceHeight(height: 30.0),
             const MenuCategories(),

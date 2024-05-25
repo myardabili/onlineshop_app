@@ -20,9 +20,9 @@ final class SearchProductFailure extends SearchProductState {
 }
 
 final class SearchProductLoaded extends SearchProductState {
-  final SearchProductModel data;
+  final List<Product> product;
 
-  const SearchProductLoaded({required this.data});
+  const SearchProductLoaded({required this.product});
   @override
-  List<Object> get props => [data];
+  List<Object> get props => [product];
 }

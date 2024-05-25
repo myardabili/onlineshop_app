@@ -30,19 +30,6 @@ class _AddressPageState extends State<AddressPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Address'),
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.goNamed(
-                RouteConstants.cart,
-                pathParameters: PathParameters(
-                  rootTab: RootTab.order,
-                ).toMap(),
-              );
-            },
-            icon: Assets.icons.cart.svg(height: 24.0),
-          ),
-        ],
       ),
       body: ListView(
         padding: const EdgeInsets.all(20.0),

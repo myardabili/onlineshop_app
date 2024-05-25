@@ -20,15 +20,18 @@ import 'package:onlineshop_app/features/home/presentation/bloc/checkout/checkout
 import 'package:onlineshop_app/features/home/presentation/bloc/category/category_bloc.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/product_category/product_category_bloc.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/product_detail/product_detail_bloc.dart';
+import 'package:onlineshop_app/features/home/presentation/bloc/search_product/search_product_bloc.dart';
 import 'package:onlineshop_app/features/orders/data/datasources/cost_remote_datasource.dart';
 import 'package:onlineshop_app/features/orders/data/datasources/order_remote_datasource.dart';
 import 'package:onlineshop_app/features/orders/presentation/bloc/check_payment_status/check_payment_status_bloc.dart';
 import 'package:onlineshop_app/features/orders/presentation/bloc/cost/cost_bloc.dart';
 import 'package:onlineshop_app/features/orders/presentation/bloc/order/order_bloc.dart';
 import 'package:onlineshop_app/features/profile/data/datasources/history_order_remote_datasource.dart';
+import 'package:onlineshop_app/features/profile/data/datasources/user_remote_datasource.dart';
 import 'package:onlineshop_app/features/profile/presentation/bloc/history_order/history_order_bloc.dart';
 import 'package:onlineshop_app/features/profile/presentation/bloc/order_detail/order_detail_bloc.dart';
 import 'package:onlineshop_app/features/profile/presentation/bloc/tracking/tracking_bloc.dart';
+import 'package:onlineshop_app/features/profile/presentation/bloc/user/user_bloc.dart';
 
 import 'core/constants/app_colors.dart';
 
@@ -110,6 +113,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (contex) => TrackingBloc(HistoryOrderRemoteDatasource()),
         ),
+        BlocProvider(
+          create: (contex) => SearchProductBloc(ProductRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => UserBloc(UserRemoteDatasource()),
+        ),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
@@ -122,7 +131,7 @@ class MyApp extends StatelessWidget {
           appBarTheme: AppBarTheme(
             color: AppColors.white,
             titleTextStyle: GoogleFonts.quicksand(
-              color: AppColors.primary,
+              color: AppColors.black,
               fontSize: 18.0,
               fontWeight: FontWeight.w700,
             ),

@@ -18,7 +18,7 @@ class SearchProductBloc extends Bloc<SearchProductEvent, SearchProductState> {
       final result = await _datasource.searchProduct(event.query);
       result.fold(
         (failure) => emit(SearchProductFailure(message: failure)),
-        (data) => emit(SearchProductLoaded(data: data)),
+        (data) => emit(SearchProductLoaded(product: data.data!.data!)),
       );
     });
   }
