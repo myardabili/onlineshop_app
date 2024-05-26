@@ -54,7 +54,7 @@ class _ShippingDetailPageState extends State<ShippingDetailPage> {
           // ProductTile(
           //   data: orders.first,
           // ),
-          const SpaceHeight(height: 36.0),
+          // const SpaceHeight(height: 36.0),
           Container(
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.stroke),

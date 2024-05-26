@@ -199,12 +199,12 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             const SpaceHeight(height: 20.0),
             Button.filled(
               onPressed: () {
-                context.goNamed(
+                context.pushNamed(
                   RouteConstants.paymentDetail,
                   pathParameters: PathParameters().toMap(),
                 );
               },
-              label: 'Pilih Pembayaran',
+              label: 'Continue to Payment',
             ),
           ],
         ),
@@ -266,39 +266,6 @@ class _SelectShipping extends StatelessWidget {
                   ],
                 ),
                 const SpaceHeight(height: 18.0),
-                // Container(
-                //   decoration: ShapeDecoration(
-                //     shape: RoundedRectangleBorder(
-                //       side: const BorderSide(
-                //         width: 1.50,
-                //         color: AppColors.stroke,
-                //       ),
-                //       borderRadius: BorderRadius.circular(14),
-                //     ),
-                //   ),
-                //   child: ListTile(
-                //     leading: Assets.icons.routing.svg(),
-                //     subtitle: const Text('Dikirim dari Kabupaten Banyuwangi'),
-                //     trailing: const Text(
-                //       'berat: 1kg',
-                //       textAlign: TextAlign.right,
-                //       style: TextStyle(
-                //         color: AppColors.primary,
-                //         fontSize: 16,
-                //         fontWeight: FontWeight.w500,
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SpaceHeight(height: 12.0),
-                // const Text(
-                //   'Estimasi tiba 20 - 23 Januari (Rp. 20.000)',
-                //   style: TextStyle(
-                //     fontSize: 16,
-                //     fontWeight: FontWeight.w600,
-                //   ),
-                // ),
-                // const SpaceHeight(height: 30.0),
                 const Divider(color: AppColors.stroke),
                 BlocBuilder<CostBloc, CostState>(
                   builder: (context, state) {
@@ -365,49 +332,49 @@ class _SelectShipping extends StatelessWidget {
   }
 }
 
-class _ShippingSelected extends StatelessWidget {
-  const _ShippingSelected();
+// class ShippingSelected extends StatelessWidget {
+//   const ShippingSelected({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 20.0),
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColors.stroke),
-          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-        ),
-        child: const Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                Text(
-                  'Reguler',
-                  style: TextStyle(fontSize: 16),
-                ),
-                Spacer(),
-                Text(
-                  'Edit',
-                  style: TextStyle(fontSize: 16),
-                ),
-                SpaceWidth(width: 4.0),
-                Icon(Icons.chevron_right),
-              ],
-            ),
-            SpaceHeight(height: 12.0),
-            Text(
-              'JNE (Rp. 25.000)',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            Text('Estimasi tiba 2 Januari 2024'),
-          ],
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: () {},
+//       child: Container(
+//         padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 20.0),
+//         decoration: BoxDecoration(
+//           border: Border.all(color: AppColors.stroke),
+//           borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+//         ),
+//         child: const Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Row(
+//               children: [
+//                 Text(
+//                   'Reguler',
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 Spacer(),
+//                 Text(
+//                   'Edit',
+//                   style: TextStyle(fontSize: 16),
+//                 ),
+//                 SpaceWidth(width: 4.0),
+//                 Icon(Icons.chevron_right),
+//               ],
+//             ),
+//             SpaceHeight(height: 12.0),
+//             Text(
+//               'JNE (Rp. 25.000)',
+//               style: TextStyle(
+//                 fontSize: 16,
+//                 fontWeight: FontWeight.w700,
+//               ),
+//             ),
+//             Text('Estimasi tiba 2 Januari 2024'),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

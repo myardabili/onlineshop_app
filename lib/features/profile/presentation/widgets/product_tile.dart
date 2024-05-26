@@ -12,52 +12,54 @@ class ProductTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 10.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.stroke),
-        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-      ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-            child: Image.network(
-              // '${URLs.baseUrlImage}${data.product!.image!}',
-              data.product!.image!.contains('http')
-                  ? data.product!.image!
-                  : '${URLs.baseUrlImage}${data.product!.image}',
-              width: 68.0,
-              height: 68.0,
+    return Row(
+      children: [
+        Container(
+          height: 85,
+          width: 85,
+          clipBehavior: Clip.antiAlias,
+          decoration: BoxDecoration(
+            color: AppColors.light,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Image.network(
+            data.product!.image!.contains('http')
+                ? data.product!.image!
+                : '${URLs.baseUrlImage}${data.product!.image}',
+            fit: BoxFit.cover,
+          ),
+        ),
+        const SpaceWidth(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              data.product!.name!,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          const SpaceWidth(width: 14.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                data.product!.name!,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-                overflow: TextOverflow.ellipsis,
+            const SpaceHeight(height: 4),
+            Text(
+              'Qty: ${data.quantity}',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
               ),
-              Row(
-                children: [
-                  Text(
-                    '${data.product!.price!.currencyFormatRp} x ${data.quantity} = ${(data.product!.price! * data.quantity!).currencyFormatRp}',
-                    style: const TextStyle(
-                      color: AppColors.primary,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
+            ),
+            const SpaceHeight(height: 4),
+            Text(
+              data.product!.price!.currencyFormatRp,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

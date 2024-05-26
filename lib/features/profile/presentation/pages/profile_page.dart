@@ -32,123 +32,263 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile'),
+        elevation: 0,
+        scrolledUnderElevation: 0,
       ),
       body: ListView(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
         children: [
-          CircleAvatar(
-            radius: 30,
-            child: ClipOval(
-              child: Image.network(
-                'https://cdn-icons-png.flaticon.com/512/4128/4128349.png',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const SpaceHeight(height: 12),
-          BlocBuilder<UserBloc, UserState>(
-            builder: (context, state) {
-              if (state is UserLoading) {
-                return const CircleLoading();
-              }
-              if (state is UserLoaded) {
-                return Center(
-                  child: Text(
-                    state.user.name!,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                );
-              }
-              return const Text('No user');
-            },
-          ),
-          const SpaceHeight(height: 30),
-          ListTileItem(
-            label: 'Your Profile',
-            leading: Assets.icons.user.svg(
-              colorFilter: const ColorFilter.mode(
-                AppColors.primary,
-                BlendMode.srcIn,
-              ),
-            ),
-            onTap: () {
-              context.pushNamed(
-                RouteConstants.orderList,
-                pathParameters: PathParameters(
-                  rootTab: RootTab.account,
-                ).toMap(),
-              );
-            },
-          ),
-          const SpaceHeight(height: 8),
-          ListTileItem(
-            label: 'My Orders',
-            leading: Assets.icons.bag.svg(
-              colorFilter: const ColorFilter.mode(
-                AppColors.primary,
-                BlendMode.srcIn,
-              ),
-            ),
-            onTap: () {
-              context.pushNamed(
-                RouteConstants.orderList,
-                pathParameters: PathParameters(
-                  rootTab: RootTab.account,
-                ).toMap(),
-              );
-            },
-          ),
-          const SpaceHeight(height: 8),
-          ListTileItem(
-            label: 'Payment Method',
-            leading: Assets.icons.creditcard.svg(
-              colorFilter: const ColorFilter.mode(
-                AppColors.primary,
-                BlendMode.srcIn,
-              ),
-            ),
-            onTap: () {},
-          ),
-          const SpaceHeight(height: 8),
-          ListTileItem(
-            label: 'Settings',
-            leading: const Icon(
-              Icons.settings_sharp,
+          Container(
+            height: 89,
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
               color: AppColors.primary,
             ),
-            onTap: () {},
-          ),
-          const SpaceHeight(height: 8),
-          BlocConsumer<LogoutBloc, LogoutState>(
-            listener: (context, state) {
-              if (state is LogoutFailure) {
-                context.goNamed(
-                  RouteConstants.login,
-                );
-              }
-              if (state is LogoutLoaded) {
-                context.goNamed(RouteConstants.root,
-                    pathParameters: PathParameters().toMap());
-              }
-              return;
-            },
-            builder: (context, state) {
-              if (state is LogoutLoading) {
-                return const CircleLoading();
-              }
-              return ListTileItem(
-                label: 'Logout',
-                leading: const Icon(
-                  Icons.login_outlined,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColors.light,
+                      width: 3,
+                    ),
+                  ),
+                  child: CircleAvatar(
+                    radius: 30,
+                    child: ClipOval(
+                      child: Image.network(
+                        'https://cdn-icons-png.flaticon.com/512/4128/4128349.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
-                onTap: () {
-                  context.read<LogoutBloc>().add(OnLogoutEvent());
-                },
-              );
-            },
+                const SpaceWidth(width: 12),
+                BlocBuilder<UserBloc, UserState>(
+                  builder: (context, state) {
+                    if (state is UserLoading) {
+                      return const CircleLoading();
+                    }
+                    if (state is UserLoaded) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            state.user.name!,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.light,
+                            ),
+                          ),
+                          const SpaceHeight(height: 4),
+                          Text(
+                            state.user.email!,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: AppColors.light,
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    return const SizedBox();
+                  },
+                ),
+                const Spacer(),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(
+                    Icons.edit,
+                    color: AppColors.light,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SpaceHeight(height: 30),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: AppColors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.black.withOpacity(0.2),
+                  blurRadius: 6,
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                ListTileItem(
+                  label: 'Your Profile',
+                  leading: Assets.icons.user.svg(
+                    colorFilter: const ColorFilter.mode(
+                      AppColors.primary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: AppColors.primary,
+                  ),
+                  onTap: () {
+                    context.pushNamed(
+                      RouteConstants.profileDetail,
+                      pathParameters: PathParameters(
+                        rootTab: RootTab.profile,
+                      ).toMap(),
+                    );
+                  },
+                ),
+                const SpaceHeight(height: 8),
+                ListTileItem(
+                  label: 'My Orders',
+                  leading: Assets.icons.bag.svg(
+                    colorFilter: const ColorFilter.mode(
+                      AppColors.primary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: AppColors.primary,
+                  ),
+                  onTap: () {
+                    context.pushNamed(
+                      RouteConstants.orderList,
+                      pathParameters: PathParameters(
+                        rootTab: RootTab.profile,
+                      ).toMap(),
+                    );
+                  },
+                ),
+                const SpaceHeight(height: 8),
+                ListTileItem(
+                  label: 'Payment Method',
+                  leading: Assets.icons.creditcard.svg(
+                    colorFilter: const ColorFilter.mode(
+                      AppColors.primary,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: AppColors.primary,
+                  ),
+                  onTap: () {},
+                ),
+                const SpaceHeight(height: 8),
+                ListTileItem(
+                  label: 'Settings',
+                  leading: const Icon(
+                    Icons.settings_sharp,
+                    color: AppColors.primary,
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: AppColors.primary,
+                  ),
+                  onTap: () {},
+                ),
+                const SpaceHeight(height: 8),
+                BlocConsumer<LogoutBloc, LogoutState>(
+                  listener: (context, state) {
+                    if (state is LogoutFailure) {
+                      context.goNamed(
+                        RouteConstants.login,
+                      );
+                    }
+                    if (state is LogoutLoaded) {
+                      context.goNamed(RouteConstants.root,
+                          pathParameters: PathParameters().toMap());
+                    }
+                    return;
+                  },
+                  builder: (context, state) {
+                    if (state is LogoutLoading) {
+                      return const CircleLoading();
+                    }
+                    return ListTileItem(
+                      label: 'Logout',
+                      leading: const Icon(
+                        Icons.login_outlined,
+                      ),
+                      trailing: const Icon(
+                        Icons.arrow_forward_ios_rounded,
+                        size: 16,
+                        color: AppColors.primary,
+                      ),
+                      onTap: () {
+                        context.read<LogoutBloc>().add(OnLogoutEvent());
+                      },
+                    );
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SpaceHeight(height: 20),
+          const Text(
+            'More',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SpaceHeight(height: 20),
+          Container(
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: AppColors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.black.withOpacity(0.2),
+                  blurRadius: 6,
+                ),
+              ],
+            ),
+            child: Column(
+              children: [
+                ListTileItem(
+                  label: 'Legal and Policies',
+                  leading: const Icon(
+                    Icons.shield_outlined,
+                    color: AppColors.primary,
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: AppColors.primary,
+                  ),
+                  onTap: () {},
+                ),
+                const SpaceHeight(height: 8),
+                ListTileItem(
+                  label: 'Help & Support',
+                  leading: const Icon(
+                    Icons.contact_support_outlined,
+                    color: AppColors.primary,
+                  ),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    size: 16,
+                    color: AppColors.primary,
+                  ),
+                  onTap: () {},
+                ),
+              ],
+            ),
           ),
         ],
       ),

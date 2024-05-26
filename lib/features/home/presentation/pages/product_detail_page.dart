@@ -71,7 +71,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                           previousValue + element.quantity);
                   return totalQuantity > 0
                       ? badges.Badge(
-                          position: badges.BadgePosition.topEnd(top: 1, end: 1),
+                          position: badges.BadgePosition.topEnd(top: 1, end: 4),
                           badgeAnimation: const badges.BadgeAnimation.scale(),
                           badgeContent: Text(
                             totalQuantity.toString(),

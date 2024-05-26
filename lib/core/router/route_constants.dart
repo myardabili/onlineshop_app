@@ -68,4 +68,12 @@ class RouteConstants {
   /// route for page [ProductCategoryPage]
   static const String productCategory = 'product_category';
   static const String productCategoryPath = 'product_category';
+
+  /// route for page [ProfilePage]
+  static const String profile = 'profile';
+  static const String profilePath = 'profile';
+
+  /// route for page [ProfileDetailPage]
+  static const String profileDetail = 'profile_detail';
+  static const String profileDetailPath = 'profile_detail';
 }

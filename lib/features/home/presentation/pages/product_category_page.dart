@@ -9,6 +9,7 @@ import 'package:onlineshop_app/features/home/presentation/bloc/category/category
 import 'package:onlineshop_app/features/home/presentation/bloc/product_category/product_category_bloc.dart';
 
 import '../../../../api/urls.dart';
+import '../../../../core/constants/app_colors.dart';
 import '../../../../core/router/app_router.dart';
 
 class ProductCategoryPage extends StatefulWidget {
@@ -112,10 +113,8 @@ class _ProductCategoryPageState extends State<ProductCategoryPage> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 0,
-            blurRadius: 20,
-            offset: const Offset(0, 3),
+            color: AppColors.black.withOpacity(0.2),
+            blurRadius: 6,
           ),
         ],
       ),

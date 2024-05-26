@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:onlineshop_app/core/assets/assets.gen.dart';
-import 'package:onlineshop_app/core/components/spaces.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:onlineshop_app/core/constants/app_colors.dart';
 import 'package:onlineshop_app/core/router/app_router.dart';
 import 'package:onlineshop_app/core/components/circle_loading.dart';
 
@@ -26,6 +26,7 @@ class Header extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
+                color: AppColors.primary,
               ),
             ),
             Text(
@@ -38,61 +39,43 @@ class Header extends StatelessWidget {
           ],
         ),
         const Spacer(),
-        Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black.withOpacity(0.5)),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: BlocBuilder<CheckoutBloc, CheckoutState>(
-            builder: (context, state) {
-              if (state is CheckoutLoading) {
-                return const CircleLoading();
-              }
-              if (state is CheckoutLoaded) {
-                final totalQuantity = state.items.fold<int>(
-                    0,
-                    (previousValue, element) =>
-                        previousValue + element.quantity);
-                return totalQuantity > 0
-                    ? badges.Badge(
-                        badgeContent: Text(
-                          totalQuantity.toString(),
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        child: IconButton(
-                          onPressed: () {
-                            context.goNamed(RouteConstants.cart,
-                                pathParameters: PathParameters().toMap());
-                          },
-                          icon: Assets.icons.cart.svg(height: 20),
-                        ),
-                      )
-                    : IconButton(
+        BlocBuilder<CheckoutBloc, CheckoutState>(
+          builder: (context, state) {
+            if (state is CheckoutLoading) {
+              return const CircleLoading();
+            }
+            if (state is CheckoutLoaded) {
+              final totalQuantity = state.items.fold<int>(0,
+                  (previousValue, element) => previousValue + element.quantity);
+              return totalQuantity > 0
+                  ? badges.Badge(
+                      position: badges.BadgePosition.topEnd(top: 1, end: 5),
+                      badgeContent: Text(
+                        totalQuantity.toString(),
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      child: IconButton(
                         onPressed: () {
                           context.goNamed(RouteConstants.cart,
                               pathParameters: PathParameters().toMap());
                         },
                         icon: Assets.icons.cart.svg(height: 20),
-                      );
-              }
-              return const SizedBox.shrink();
-            },
-          ),
+                      ),
+                    )
+                  : IconButton(
+                      onPressed: () {
+                        context.goNamed(RouteConstants.cart,
+                            pathParameters: PathParameters().toMap());
+                      },
+                      icon: Assets.icons.cart.svg(height: 20),
+                    );
+            }
+            return const SizedBox.shrink();
+          },
         ),
-        const SpaceWidth(width: 16.0),
-        Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.black.withOpacity(0.5)),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: IconButton(
-            onPressed: () {},
-            icon: Assets.icons.notification.svg(height: 20),
-          ),
+        IconButton(
+          onPressed: () {},
+          icon: Assets.icons.notification.svg(height: 20),
         ),
       ],
     );

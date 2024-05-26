@@ -4,7 +4,7 @@ enum RootTab {
   home('0'),
   explore('1'),
   order('2'),
-  account('3');
+  profile('3');
 
   final String value;
   const RootTab(this.value);

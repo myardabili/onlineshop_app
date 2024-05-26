@@ -4,7 +4,6 @@ import 'package:go_router/go_router.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/address/presentation/bloc/get_address/get_address_bloc.dart';
 
-import '../../../../core/assets/assets.gen.dart';
 import '../../../../core/components/buttons.dart';
 import '../../../../core/components/spaces.dart';
 import '../../../../core/router/app_router.dart';
@@ -87,7 +86,7 @@ class _AddressPageState extends State<AddressPage> {
           const SpaceHeight(height: 40.0),
           Button.outlined(
             onPressed: () {
-              context.goNamed(
+              context.pushNamed(
                 RouteConstants.addAddress,
                 pathParameters: PathParameters(
                   rootTab: RootTab.order,
@@ -141,14 +140,14 @@ class _AddressPageState extends State<AddressPage> {
             const SpaceHeight(height: 12.0),
             Button.filled(
               onPressed: () {
-                context.goNamed(
+                context.pushNamed(
                   RouteConstants.orderDetail,
                   pathParameters: PathParameters(
                     rootTab: RootTab.order,
                   ).toMap(),
                 );
               },
-              label: 'Lanjutkan',
+              label: 'Next',
             ),
           ],
         ),

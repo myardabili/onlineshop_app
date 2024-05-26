@@ -25,6 +25,8 @@ class _HistoryOrderPageState extends State<HistoryOrderPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pesanan'),
+        elevation: 0,
+        scrolledUnderElevation: 0,
       ),
       body: BlocBuilder<HistoryOrderBloc, HistoryOrderState>(
         builder: (context, state) {

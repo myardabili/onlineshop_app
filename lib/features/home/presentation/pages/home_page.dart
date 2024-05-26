@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/all_product/all_product_bloc.dart';
 import 'package:onlineshop_app/features/home/presentation/widgets/organism/header.dart';
 import 'package:onlineshop_app/features/home/presentation/widgets/organism/product_list.dart';

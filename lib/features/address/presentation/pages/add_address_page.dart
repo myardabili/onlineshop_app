@@ -49,6 +49,8 @@ class _AddAddressPageState extends State<AddAddressPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Adress'),
+        elevation: 0,
+        scrolledUnderElevation: 0,
       ),
       body: ListView(
         padding: const EdgeInsets.all(20.0),

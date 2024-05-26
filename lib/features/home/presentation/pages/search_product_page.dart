@@ -35,10 +35,15 @@ class _SearchProductPageState extends State<SearchProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search'),
+        elevation: 0,
+        scrolledUnderElevation: 0,
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            _searchProduct(context),
+            _searchProductForm(context),
             const SpaceHeight(height: 20),
             BlocBuilder<SearchProductBloc, SearchProductState>(
               builder: (context, state) {
@@ -47,19 +52,48 @@ class _SearchProductPageState extends State<SearchProductPage> {
                 }
                 if (state is SearchProductLoaded) {
                   return Expanded(
-                    child: GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 20.0,
-                        mainAxisSpacing: 20.0,
-                        childAspectRatio: 0.75,
-                      ),
-                      padding: const EdgeInsets.all(20),
-                      itemCount: state.product.length,
-                      itemBuilder: (context, index) {
-                        return _productItemCard(context, state, index);
-                      },
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          width: MediaQuery.of(context).size.width,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Result for "${searchController.text}"',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              Text(
+                                '${state.product.length} founds',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: GridView.builder(
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 20.0,
+                              mainAxisSpacing: 20.0,
+                              childAspectRatio: 0.75,
+                            ),
+                            padding: const EdgeInsets.all(20),
+                            itemCount: state.product.length,
+                            itemBuilder: (context, index) {
+                              return _productItemCard(context, state, index);
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 }
@@ -72,7 +106,7 @@ class _SearchProductPageState extends State<SearchProductPage> {
     );
   }
 
-  Widget _searchProduct(BuildContext context) {
+  Widget _searchProductForm(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
       child: Container(
@@ -127,10 +161,8 @@ class _SearchProductPageState extends State<SearchProductPage> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 0,
-              blurRadius: 20,
-              offset: const Offset(0, 3),
+              color: AppColors.black.withOpacity(0.2),
+              blurRadius: 6,
             ),
           ],
         ),

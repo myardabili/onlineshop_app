@@ -6,6 +6,7 @@ import 'package:onlineshop_app/core/constants/app_colors.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/auth/data/datasource/auth_local_datasource.dart';
 import 'package:onlineshop_app/core/components/circle_loading.dart';
+import 'package:badges/badges.dart' as badges;
 
 import '../../../../core/assets/assets.gen.dart';
 import '../../../../core/router/app_router.dart';
@@ -23,17 +24,53 @@ class CartPage extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
-            child: IconButton(
-              onPressed: () {
-                context.goNamed(
-                  RouteConstants.cart,
-                  pathParameters: PathParameters(
-                    rootTab: RootTab.order,
-                  ).toMap(),
-                );
+            child: BlocBuilder<CheckoutBloc, CheckoutState>(
+              builder: (context, state) {
+                if (state is CheckoutLoading) {
+                  return const CircleLoading();
+                }
+                if (state is CheckoutLoaded) {
+                  final totalQuantity = state.items.fold<int>(
+                      0,
+                      (previousValue, element) =>
+                          previousValue + element.quantity);
+                  return totalQuantity > 0
+                      ? badges.Badge(
+                          position: badges.BadgePosition.topEnd(top: 1, end: 5),
+                          badgeContent: Text(
+                            totalQuantity.toString(),
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          child: IconButton(
+                            onPressed: () {
+                              context.goNamed(RouteConstants.cart,
+                                  pathParameters: PathParameters().toMap());
+                            },
+                            icon: Assets.icons.cart.svg(height: 20),
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            context.goNamed(RouteConstants.cart,
+                                pathParameters: PathParameters().toMap());
+                          },
+                          icon: Assets.icons.cart.svg(height: 20),
+                        );
+                }
+                return const SizedBox.shrink();
               },
-              icon: Assets.icons.cart.svg(height: 20.0),
             ),
+            // child: IconButton(
+            //   onPressed: () {
+            //     context.goNamed(
+            //       RouteConstants.cart,
+            //       pathParameters: PathParameters(
+            //         rootTab: RootTab.order,
+            //       ).toMap(),
+            //     );
+            //   },
+            //   icon: Assets.icons.cart.svg(height: 20.0),
+            // ),
           ),
         ],
       ),

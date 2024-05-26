@@ -6,6 +6,7 @@ import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/all_product/all_product_bloc.dart';
 import 'package:onlineshop_app/core/components/circle_loading.dart';
 import '../../../../../core/components/spaces.dart';
+import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/router/app_router.dart';
 import '../title_content.dart';
 
@@ -86,10 +87,8 @@ class _ProductListState extends State<ProductList> {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 0,
-            blurRadius: 20,
-            offset: const Offset(0, 3),
+            color: AppColors.black.withOpacity(0.2),
+            blurRadius: 6,
           ),
         ],
       ),

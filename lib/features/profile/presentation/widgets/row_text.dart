@@ -24,7 +24,7 @@ class RowText extends StatelessWidget {
         Text(
           label,
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 14,
             fontWeight: fontWeight,
           ),
         ),
@@ -32,7 +32,7 @@ class RowText extends StatelessWidget {
           child: Text(
             value,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 14,
               fontWeight: fontWeight,
               color: valueColor,
             ),

@@ -179,7 +179,6 @@ class PaymentDetailPage extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [
-          const SpaceHeight(height: 30.0),
           Row(
             children: [
               const Text(
@@ -388,7 +387,7 @@ class PaymentDetailPage extends StatelessWidget {
                                   products: state.items,
                                 ));
                           },
-                          label: 'Bayar Sekarang',
+                          label: 'Pay Now',
                         );
                       },
                     ),
