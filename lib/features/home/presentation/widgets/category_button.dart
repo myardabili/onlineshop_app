@@ -1,15 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class CategoryButton extends StatelessWidget {
-  final String imagePath;
-  final String label;
-  final VoidCallback onPressed;
+  final String? imagePath;
+  final String? label;
+  final VoidCallback? onPressed;
 
   const CategoryButton({
     super.key,
-    required this.imagePath,
-    required this.label,
-    required this.onPressed,
+    this.imagePath,
+    this.label,
+    this.onPressed,
   });
 
   @override
@@ -28,7 +29,7 @@ class CategoryButton extends StatelessWidget {
             vertical: 8,
           ),
           child: Text(
-            label,
+            label!,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               fontSize: 12,

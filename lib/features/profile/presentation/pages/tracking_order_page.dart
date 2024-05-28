@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:onlineshop_app/core/components/circle_loading.dart';
+import 'package:onlineshop_app/features/home/presentation/widgets/button_shimmer.dart';
+import 'package:onlineshop_app/features/home/presentation/widgets/product_detail_shimmer.dart';
 
 import 'package:onlineshop_app/features/profile/presentation/bloc/order_detail/order_detail_bloc.dart';
 import 'package:onlineshop_app/features/profile/presentation/widgets/product_tile.dart';
@@ -41,7 +42,7 @@ class _TrackingOrderPageState extends State<TrackingOrderPage> {
       body: BlocBuilder<OrderDetailBloc, OrderDetailState>(
         builder: (context, state) {
           if (state is OrderDetailLoading) {
-            return const CircleLoading();
+            return const ProductDetailShimmer();
           }
           if (state is OrderDetailFailure) {
             return Text(state.message);
@@ -95,36 +96,37 @@ class _TrackingOrderPageState extends State<TrackingOrderPage> {
           );
         },
       ),
-      bottomNavigationBar: Container(
-        height: 60,
+      bottomNavigationBar: SizedBox(
+        height: 80,
         width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            BlocBuilder<OrderDetailBloc, OrderDetailState>(
-              builder: (context, state) {
-                if (state is OrderDetailLoading) {
-                  return const CircleLoading();
-                }
-                if (state is OrderDetailFailure) {
-                  return Text(state.message);
-                }
-                if (state is OrderDetailLoaded) {
-                  return Button.filled(
-                    onPressed: () {
-                      context.pushNamed(
-                        RouteConstants.shippingDetail,
-                        pathParameters: PathParameters().toMap(),
-                        extra: state.orderDetail.shippingResi.toString(),
-                      );
-                    },
-                    label: 'Detail pelacakan pengiriman',
-                  );
-                }
-                return const SizedBox();
-              },
-            ),
-          ],
+        child: BlocBuilder<OrderDetailBloc, OrderDetailState>(
+          builder: (context, state) {
+            if (state is OrderDetailLoading) {
+              return const ButtonShimmer();
+            }
+            if (state is OrderDetailFailure) {
+              return Text(state.message);
+            }
+            if (state is OrderDetailLoaded) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                child: Button.filled(
+                  onPressed: () {
+                    context.pushNamed(
+                      RouteConstants.shippingDetail,
+                      pathParameters: PathParameters().toMap(),
+                      extra: state.orderDetail.shippingResi.toString(),
+                    );
+                  },
+                  label: 'Detail pelacakan pengiriman',
+                ),
+              );
+            }
+            return const SizedBox();
+          },
         ),
       ),
     );

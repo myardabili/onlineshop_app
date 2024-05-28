@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:onlineshop_app/core/components/circle_loading.dart';
+import 'package:onlineshop_app/features/profile/presentation/widgets/history_order_shimmer.dart';
 
 import '../../../../core/components/spaces.dart';
 import '../bloc/history_order/history_order_bloc.dart';
@@ -34,7 +34,7 @@ class _HistoryOrderPageState extends State<HistoryOrderPage> {
             return Text(state.message);
           }
           if (state is HistoryOrderLoading) {
-            return const CircleLoading();
+            return const HistoryOrderShimmer();
           }
           if (state is HistoryOrderLoaded) {
             if (state.orders.orders!.isEmpty) {

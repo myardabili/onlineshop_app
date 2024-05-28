@@ -1,5 +1,5 @@
 class URLs {
-  static const base = 'https://b230-103-162-62-225.ngrok-free.app';
+  static const base = 'http://192.168.221.102:8000';
 
   static const baseUrlImage = '$base/storage/products/';
 

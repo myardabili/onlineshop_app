@@ -4,11 +4,11 @@ import 'package:go_router/go_router.dart';
 import 'package:onlineshop_app/api/urls.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/all_product/all_product_bloc.dart';
-import 'package:onlineshop_app/core/components/circle_loading.dart';
 import '../../../../../core/components/spaces.dart';
 import '../../../../../core/constants/app_colors.dart';
 import '../../../../../core/router/app_router.dart';
 import '../title_content.dart';
+import '../product_shimmer.dart';
 
 class ProductList extends StatefulWidget {
   const ProductList({
@@ -40,7 +40,7 @@ class _ProductListState extends State<ProductList> {
         BlocBuilder<AllProductBloc, AllProductState>(
           builder: (context, state) {
             if (state is AllProductLoading) {
-              return const CircleLoading();
+              return const ProductShimmer();
             }
             if (state is AllProductFailure) {
               return Text(state.message);

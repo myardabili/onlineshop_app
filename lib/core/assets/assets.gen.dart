@@ -89,16 +89,23 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/bag banner.png
+  AssetGenImage get bagBanner =>
+      const AssetGenImage('assets/images/bag banner.png');
+
   $AssetsImagesBanksGen get banks => const $AssetsImagesBanksGen();
 
-  /// File path: assets/images/banner1.png
-  AssetGenImage get banner1 => const AssetGenImage('assets/images/banner1.png');
+  /// File path: assets/images/clothes banner.png
+  AssetGenImage get clothesBanner =>
+      const AssetGenImage('assets/images/clothes banner.png');
 
-  /// File path: assets/images/banner2.png
-  AssetGenImage get banner2 => const AssetGenImage('assets/images/banner2.png');
+  /// File path: assets/images/electronics banner.png
+  AssetGenImage get electronicsBanner =>
+      const AssetGenImage('assets/images/electronics banner.png');
 
-  $AssetsImagesCategoriesGen get categories =>
-      const $AssetsImagesCategoriesGen();
+  /// File path: assets/images/flashsale.png
+  AssetGenImage get flashsale =>
+      const AssetGenImage('assets/images/flashsale.png');
 
   /// File path: assets/images/google.png
   AssetGenImage get google => const AssetGenImage('assets/images/google.png');
@@ -110,11 +117,16 @@ class $AssetsImagesGen {
   AssetGenImage get processOrder =>
       const AssetGenImage('assets/images/process-order.png');
 
-  $AssetsImagesProductsGen get products => const $AssetsImagesProductsGen();
-
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [banner1, banner2, google, oops, processOrder];
+  List<AssetGenImage> get values => [
+        bagBanner,
+        clothesBanner,
+        electronicsBanner,
+        flashsale,
+        google,
+        oops,
+        processOrder
+      ];
 }
 
 class $AssetsImagesBanksGen {
@@ -133,66 +145,6 @@ class $AssetsImagesBanksGen {
 
   /// List of all assets
   List<AssetGenImage> get values => [bca, bRIDirectDebit, mandiri];
-}
-
-class $AssetsImagesCategoriesGen {
-  const $AssetsImagesCategoriesGen();
-
-  /// File path: assets/images/categories/menu-bestseller.png
-  AssetGenImage get menuBestseller =>
-      const AssetGenImage('assets/images/categories/menu-bestseller.png');
-
-  /// File path: assets/images/categories/menu-flashsale.png
-  AssetGenImage get menuFlashsale =>
-      const AssetGenImage('assets/images/categories/menu-flashsale.png');
-
-  /// File path: assets/images/categories/menu-more.png
-  AssetGenImage get menuMore =>
-      const AssetGenImage('assets/images/categories/menu-more.png');
-
-  /// File path: assets/images/categories/menu-toprated.png
-  AssetGenImage get menuToprated =>
-      const AssetGenImage('assets/images/categories/menu-toprated.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values =>
-      [menuBestseller, menuFlashsale, menuMore, menuToprated];
-}
-
-class $AssetsImagesProductsGen {
-  const $AssetsImagesProductsGen();
-
-  /// File path: assets/images/products/earphone.png
-  AssetGenImage get earphone =>
-      const AssetGenImage('assets/images/products/earphone.png');
-
-  /// File path: assets/images/products/keyboard.png
-  AssetGenImage get keyboard =>
-      const AssetGenImage('assets/images/products/keyboard.png');
-
-  /// File path: assets/images/products/lampu.png
-  AssetGenImage get lampu =>
-      const AssetGenImage('assets/images/products/lampu.png');
-
-  /// File path: assets/images/products/mac.png
-  AssetGenImage get mac =>
-      const AssetGenImage('assets/images/products/mac.png');
-
-  /// File path: assets/images/products/mac2.png
-  AssetGenImage get mac2 =>
-      const AssetGenImage('assets/images/products/mac2.png');
-
-  /// File path: assets/images/products/sepatu.png
-  AssetGenImage get sepatu =>
-      const AssetGenImage('assets/images/products/sepatu.png');
-
-  /// File path: assets/images/products/sepatu2.png
-  AssetGenImage get sepatu2 =>
-      const AssetGenImage('assets/images/products/sepatu2.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values =>
-      [earphone, keyboard, lampu, mac, mac2, sepatu, sepatu2];
 }
 
 class Assets {

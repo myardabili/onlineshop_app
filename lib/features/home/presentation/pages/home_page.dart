@@ -19,14 +19,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late TextEditingController searchController;
 
-  final List<String> banners1 = [
-    Assets.images.banner1.path,
-    Assets.images.banner1.path,
-  ];
-  final List<String> banners2 = [
-    Assets.images.banner2.path,
-    Assets.images.banner2.path,
-    Assets.images.banner2.path,
+  final List<String> banner = [
+    Assets.images.flashsale.path,
+    Assets.images.clothesBanner.path,
+    Assets.images.electronicsBanner.path,
+    Assets.images.bagBanner.path,
   ];
 
   @override
@@ -60,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         child: ListView(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
-            BannerSlider(items: banners2),
+            BannerSlider(items: banner),
             const SpaceHeight(height: 30.0),
             const MenuCategories(),
             const SpaceHeight(height: 30.0),

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../../core/router/app_router.dart';
 import '../../bloc/category/category_bloc.dart';
+import '../categories_shimmer.dart';
 import '../category_button.dart';
 
 class MenuCategories extends StatefulWidget {
@@ -25,9 +26,7 @@ class _MenuCategoriesState extends State<MenuCategories> {
     return BlocBuilder<CategoryBloc, CategoryState>(
       builder: (context, state) {
         if (state is CategoryLoading) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const CategoriesShimmer();
         }
         if (state is CategoryFailure) {
           return Text(state.message);

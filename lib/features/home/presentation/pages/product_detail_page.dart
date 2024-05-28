@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:onlineshop_app/core/components/circle_loading.dart';
 import 'package:onlineshop_app/core/constants/app_colors.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/product_detail/product_detail_bloc.dart';
@@ -12,6 +11,8 @@ import '../../../../core/assets/assets.gen.dart';
 import '../../../../core/components/spaces.dart';
 import '../../../../core/router/app_router.dart';
 import '../bloc/checkout/checkout_bloc.dart';
+import '../widgets/button_shimmer.dart';
+import '../widgets/product_detail_shimmer.dart';
 
 const Map<int, String> categoryMap = {
   1: 'Clothes',
@@ -104,9 +105,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       body: BlocBuilder<ProductDetailBloc, ProductDetailState>(
         builder: (context, state) {
           if (state is ProductDetailLoading) {
-            return const Center(
-              child: CircleLoading(),
-            );
+            return const ProductDetailShimmer();
           }
           if (state is ProductDetailFailure) {
             return Center(
@@ -148,17 +147,15 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   }
 
   Widget _buttonNavbarItem() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-        builder: (context, state) {
-          if (state is ProductDetailLoading) {
-            return const Center(
-              child: CircleLoading(),
-            );
-          }
-          if (state is ProductDetailLoaded) {
-            return Row(
+    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
+      builder: (context, state) {
+        if (state is ProductDetailLoading) {
+          return const ButtonShimmer();
+        }
+        if (state is ProductDetailLoaded) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -208,11 +205,11 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   ),
                 ),
               ],
-            );
-          }
-          return const SizedBox();
-        },
-      ),
+            ),
+          );
+        }
+        return const SizedBox();
+      },
     );
   }
 
