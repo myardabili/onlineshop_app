@@ -84,7 +84,7 @@ class _SearchProductPageState extends State<SearchProductPage> {
                               crossAxisCount: 2,
                               crossAxisSpacing: 20.0,
                               mainAxisSpacing: 20.0,
-                              childAspectRatio: 0.75,
+                              childAspectRatio: 0.7,
                             ),
                             padding: const EdgeInsets.all(20),
                             itemCount: state.product.length,
@@ -113,7 +113,7 @@ class _SearchProductPageState extends State<SearchProductPage> {
         width: MediaQuery.of(context).size.width,
         height: 60,
         decoration: BoxDecoration(
-          // color: AppColors.light,
+          // color: AppColors.white,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: TextFormField(
@@ -123,18 +123,17 @@ class _SearchProductPageState extends State<SearchProductPage> {
                 .add(OnSearchProduct(query: searchController.text));
           },
           controller: searchController,
-          // onChanged: onChanged,
           decoration: InputDecoration(
             hintText: 'Search product here...',
             suffixIcon: const Icon(Icons.search),
             contentPadding: const EdgeInsets.all(16.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(color: AppColors.light),
+              borderSide: const BorderSide(color: AppColors.white),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
-              borderSide: const BorderSide(color: AppColors.light),
+              borderSide: const BorderSide(color: AppColors.white),
             ),
           ),
         ),
@@ -157,7 +156,7 @@ class _SearchProductPageState extends State<SearchProductPage> {
         width: 30,
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
@@ -177,7 +176,7 @@ class _SearchProductPageState extends State<SearchProductPage> {
               height: 150.0,
               fit: BoxFit.cover,
             ),
-            const SpaceHeight(height: 10),
+            const SpaceHeight(height: 4),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(

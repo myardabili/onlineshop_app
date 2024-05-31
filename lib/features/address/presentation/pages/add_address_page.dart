@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:onlineshop_app/core/components/circle_loading.dart';
 import 'package:onlineshop_app/core/components/components.dart';
 import 'package:onlineshop_app/core/router/app_router.dart';
 import 'package:onlineshop_app/features/address/data/models/address_request_model.dart';
@@ -12,6 +13,8 @@ import 'package:onlineshop_app/features/address/presentation/bloc/city/city_bloc
 import 'package:onlineshop_app/features/address/presentation/bloc/province/province_bloc.dart';
 import 'package:onlineshop_app/features/address/presentation/bloc/subdistrict/subdistrict_bloc.dart';
 
+import '../bloc/get_address/get_address_bloc.dart';
+
 class AddAddressPage extends StatefulWidget {
   const AddAddressPage({super.key});
 
@@ -20,6 +23,20 @@ class AddAddressPage extends StatefulWidget {
 }
 
 class _AddAddressPageState extends State<AddAddressPage> {
+  final nameController = TextEditingController();
+  final addressController = TextEditingController();
+  final zipCodeController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    addressController.dispose();
+    zipCodeController.dispose();
+    phoneNumberController.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     context.read<ProvinceBloc>().add(OnGetProvince());
@@ -41,11 +58,6 @@ class _AddAddressPageState extends State<AddAddressPage> {
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-    final addressController = TextEditingController();
-    final zipCodeController = TextEditingController();
-    final phoneNumberController = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Adress'),
@@ -57,12 +69,12 @@ class _AddAddressPageState extends State<AddAddressPage> {
         children: [
           CustomTextField(
             controller: nameController,
-            label: 'Nama',
+            label: 'Full Name',
           ),
           const SpaceHeight(height: 24.0),
           CustomTextField(
             controller: addressController,
-            label: 'Alamat Lengkap',
+            label: 'Address',
           ),
           const SpaceHeight(height: 24.0),
           BlocBuilder<ProvinceBloc, ProvinceState>(
@@ -78,7 +90,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 return CustomDropdown<Province>(
                   value: selectedProvince,
                   items: data,
-                  label: 'Provinsi',
+                  label: 'Province',
                   onChanged: (value) {
                     setState(() {
                       selectedProvince = value!;
@@ -106,7 +118,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 return CustomDropdown<City>(
                   value: selectedCity,
                   items: data,
-                  label: 'Kota/Kabupaten',
+                  label: 'City',
                   onChanged: (value) {
                     setState(() {
                       selectedCity = value!;
@@ -120,7 +132,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
               return const CustomDropdown(
                 value: '-',
                 items: ['-'],
-                label: 'Kota/Kabupaten',
+                label: 'Subdistrict',
               );
             },
           ),
@@ -138,7 +150,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                 return CustomDropdown<Subdistrict>(
                   value: selectedSubdistrict,
                   items: data,
-                  label: 'Kecamatan',
+                  label: 'Subdistrict',
                   onChanged: (value) {
                     setState(() {
                       selectedSubdistrict = value!;
@@ -149,24 +161,25 @@ class _AddAddressPageState extends State<AddAddressPage> {
               return const CustomDropdown(
                 value: '-',
                 items: ['-'],
-                label: 'Kecamatan',
+                label: 'Subdistrict',
               );
             },
           ),
           const SpaceHeight(height: 24.0),
           CustomTextField(
             controller: zipCodeController,
-            label: 'Kode Pos',
+            label: 'Postal Code',
           ),
           const SpaceHeight(height: 24.0),
           CustomTextField(
             controller: phoneNumberController,
-            label: 'No Handphone',
+            label: 'Phone Number',
           ),
           const SpaceHeight(height: 24.0),
           BlocConsumer<AddAddressBloc, AddAddressState>(
             listener: (context, state) {
               if (state is AddAddressLoaded) {
+                context.read<GetAddressBloc>().add(OnGetAddress());
                 context.goNamed(
                   RouteConstants.address,
                   pathParameters: PathParameters(
@@ -174,12 +187,14 @@ class _AddAddressPageState extends State<AddAddressPage> {
                   ).toMap(),
                 );
               }
+              if (state is AddAddressFailure) {
+                ScaffoldMessenger.of(context)
+                    .showSnackBar(SnackBar(content: Text(state.message)));
+              }
             },
             builder: (context, state) {
               if (state is AddAddressLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const CircleLoading();
               }
               if (state is AddAddressLoaded) {}
               return Button.filled(
@@ -199,7 +214,7 @@ class _AddAddressPageState extends State<AddAddressPage> {
                         ),
                       );
                 },
-                label: 'Tambah Alamat',
+                label: 'Add Address',
               );
             },
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/components/spaces.dart';
+import '../../../../core/constants/app_colors.dart';
 
 class HistoryOrderShimmer extends StatelessWidget {
   const HistoryOrderShimmer({super.key});
@@ -24,7 +25,7 @@ class HistoryOrderShimmer extends StatelessWidget {
             height: 100,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              color: Colors.black,
+              color: AppColors.black,
               borderRadius: BorderRadius.circular(20),
             ),
           );

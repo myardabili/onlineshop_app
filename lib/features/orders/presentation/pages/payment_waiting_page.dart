@@ -68,7 +68,7 @@ class _PaymentWaitingPageState extends State<PaymentWaitingPage> {
               const ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(40.0)),
                 child: ColoredBox(
-                  color: AppColors.light,
+                  color: AppColors.white,
                   child: SizedBox(height: 8.0, width: 55.0),
                 ),
               ),
@@ -77,7 +77,7 @@ class _PaymentWaitingPageState extends State<PaymentWaitingPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    'Pembayaran Berhasil',
+                    'Payment Successful',
                     style: TextStyle(
                       color: AppColors.primary,
                       fontSize: 20,
@@ -85,7 +85,7 @@ class _PaymentWaitingPageState extends State<PaymentWaitingPage> {
                     ),
                   ),
                   CircleAvatar(
-                    backgroundColor: AppColors.light,
+                    backgroundColor: AppColors.white,
                     child: IconButton(
                       onPressed: () => context.pop(),
                       icon: const Icon(
@@ -112,7 +112,7 @@ class _PaymentWaitingPageState extends State<PaymentWaitingPage> {
                           pathParameters: PathParameters().toMap(),
                         );
                       },
-                      label: 'Lacak Pesanan',
+                      label: 'Track Orders',
                     ),
                   ),
                   const SpaceWidth(width: 20.0),
@@ -162,7 +162,7 @@ class _PaymentWaitingPageState extends State<PaymentWaitingPage> {
                 const SpaceWidth(width: 12.0),
                 const Flexible(
                   child: Text(
-                    'Selesaikan Pembayaran Dalam',
+                    'Complete Inner Payment',
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
@@ -265,7 +265,7 @@ class _PaymentWaitingPageState extends State<PaymentWaitingPage> {
             ListTile(
               contentPadding: EdgeInsets.zero,
               title: const Text(
-                'Total Pembayaran',
+                'Total Price',
                 style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.w400,
@@ -302,7 +302,7 @@ class _PaymentWaitingPageState extends State<PaymentWaitingPage> {
                   pathParameters: PathParameters().toMap(),
                 );
               },
-              label: 'Belanja Lagi',
+              label: 'Shopping Again',
             ),
             const SpaceHeight(height: 20.0),
             Button.outlined(
@@ -312,7 +312,7 @@ class _PaymentWaitingPageState extends State<PaymentWaitingPage> {
                   pathParameters: PathParameters().toMap(),
                 );
               },
-              label: 'Cek Status Pembayaran',
+              label: 'Check Payment Status',
             ),
           ],
         ),

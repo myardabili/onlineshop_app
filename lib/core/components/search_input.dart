@@ -32,11 +32,11 @@ class SearchInput extends StatelessWidget {
           contentPadding: const EdgeInsets.all(16.0),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(color: AppColors.light),
+            borderSide: const BorderSide(color: AppColors.white),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(color: AppColors.light),
+            borderSide: const BorderSide(color: AppColors.white),
           ),
         ),
       ),

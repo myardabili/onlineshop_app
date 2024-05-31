@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:onlineshop_app/core/components/components.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/constants/app_colors.dart';
+
 class CategoriesShimmer extends StatelessWidget {
   const CategoriesShimmer({super.key});
 
@@ -22,9 +24,10 @@ class CategoriesShimmer extends StatelessWidget {
           separatorBuilder: (context, index) => const SpaceWidth(width: 16),
           itemBuilder: (context, index) {
             return Container(
-              // height: 34,
+              height: 34,
               width: 100,
               decoration: BoxDecoration(
+                color: AppColors.black,
                 borderRadius: BorderRadius.circular(20),
               ),
             );

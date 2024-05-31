@@ -39,7 +39,7 @@ class PaymentDetailPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'Metode Pembayaran',
+                      'Payment method',
                       style: TextStyle(
                         color: AppColors.primary,
                         fontSize: 20,
@@ -47,7 +47,7 @@ class PaymentDetailPage extends StatelessWidget {
                       ),
                     ),
                     CircleAvatar(
-                      backgroundColor: AppColors.light,
+                      backgroundColor: AppColors.white,
                       child: IconButton(
                         onPressed: () => context.pop(),
                         icon: const Icon(
@@ -103,7 +103,7 @@ class PaymentDetailPage extends StatelessWidget {
                 const ClipRRect(
                   borderRadius: BorderRadius.all(Radius.circular(40.0)),
                   child: ColoredBox(
-                    color: AppColors.light,
+                    color: AppColors.white,
                     child: SizedBox(height: 8.0, width: 55.0),
                   ),
                 ),
@@ -120,7 +120,7 @@ class PaymentDetailPage extends StatelessWidget {
                       ),
                     ),
                     CircleAvatar(
-                      backgroundColor: AppColors.light,
+                      backgroundColor: AppColors.white,
                       child: IconButton(
                         onPressed: () => context.pop(),
                         icon: const Icon(
@@ -147,7 +147,7 @@ class PaymentDetailPage extends StatelessWidget {
                             pathParameters: PathParameters().toMap(),
                           );
                         },
-                        label: 'Lacak Pesanan',
+                        label: 'Track Orders',
                       ),
                     ),
                     const SpaceWidth(width: 20.0),
@@ -182,7 +182,7 @@ class PaymentDetailPage extends StatelessWidget {
           Row(
             children: [
               const Text(
-                'Metode Pembayaran',
+                'Payment method',
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -192,7 +192,7 @@ class PaymentDetailPage extends StatelessWidget {
               InkWell(
                 onTap: seeAllTap,
                 child: const Text(
-                  'Lihat semua',
+                  'See all',
                   style: TextStyle(
                     color: AppColors.primary,
                     fontSize: 12,
@@ -231,7 +231,7 @@ class PaymentDetailPage extends StatelessWidget {
           const Divider(),
           const SpaceHeight(height: 8.0),
           const Text(
-            'Ringkasan Pembayaran',
+            'Payment Summary',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -241,7 +241,7 @@ class PaymentDetailPage extends StatelessWidget {
           Row(
             children: [
               const Text(
-                'Total Belanja',
+                'Total Shopping',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
@@ -276,7 +276,7 @@ class PaymentDetailPage extends StatelessWidget {
           Row(
             children: [
               const Text(
-                'Biaya Kirim',
+                'Shipping Cost',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
@@ -317,7 +317,7 @@ class PaymentDetailPage extends StatelessWidget {
             Row(
               children: [
                 const Text(
-                  'Total Tagihan',
+                  'Total Price',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
@@ -401,7 +401,7 @@ class PaymentDetailPage extends StatelessWidget {
                       pathParameters: PathParameters().toMap(),
                     );
                   },
-                  label: 'Bayar Sekarang',
+                  label: 'Pay Now',
                 );
               },
             ),

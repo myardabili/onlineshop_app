@@ -77,7 +77,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           const Divider(),
           const SpaceHeight(height: 8.0),
           const Text(
-            'Detail Belanja :',
+            'Shopping Details :',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
@@ -87,7 +87,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           Row(
             children: [
               const Text(
-                'Total Harga (Produk)',
+                'Total Price (Product)',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
@@ -123,7 +123,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
           Row(
             children: [
               const Text(
-                'Total Ongkos Kirim',
+                'Shipping cost',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                 ),
@@ -164,7 +164,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
             Row(
               children: [
                 const Text(
-                  'Total Belanja',
+                  'Total Shopping',
                   style: TextStyle(
                     fontWeight: FontWeight.w600,
                   ),
@@ -236,7 +236,7 @@ class _SelectShipping extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(40.0)),
                     child: ColoredBox(
-                      color: AppColors.light,
+                      color: AppColors.white,
                       child: SizedBox(height: 8.0, width: 55.0),
                     ),
                   ),
@@ -246,7 +246,7 @@ class _SelectShipping extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'Metode Pengiriman',
+                      'Shipping Method',
                       style: TextStyle(
                         color: AppColors.primary,
                         fontSize: 20,
@@ -254,7 +254,7 @@ class _SelectShipping extends StatelessWidget {
                       ),
                     ),
                     CircleAvatar(
-                      backgroundColor: AppColors.light,
+                      backgroundColor: AppColors.white,
                       child: IconButton(
                         onPressed: () => context.pop(),
                         icon: const Icon(
@@ -289,8 +289,8 @@ class _SelectShipping extends StatelessWidget {
                             },
                             title: Text(
                                 '${item.service} - ${item.description} (${item.cost![0].value!.currencyFormatRp})'),
-                            subtitle:
-                                Text('Estimasi tiba ${item.cost![0].etd} Hari'),
+                            subtitle: Text(
+                                'Estimate arrived ${item.cost![0].etd} Days'),
                           );
                         },
                         separatorBuilder: (context, index) =>
@@ -321,7 +321,7 @@ class _SelectShipping extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Pilih Pengiriman',
+              'Select Shipping',
               style: TextStyle(fontSize: 16),
             ),
             Icon(Icons.chevron_right),

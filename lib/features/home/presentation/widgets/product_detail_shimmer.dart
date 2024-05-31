@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/constants/app_colors.dart';
+
 class ProductDetailShimmer extends StatelessWidget {
   const ProductDetailShimmer({super.key});
 
@@ -15,7 +17,7 @@ class ProductDetailShimmer extends StatelessWidget {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
-          color: Colors.black,
+          color: AppColors.black,
         ),
       ),
     );

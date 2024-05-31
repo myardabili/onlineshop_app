@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
+import '../../../../core/constants/app_colors.dart';
+
 class ButtonShimmer extends StatelessWidget {
   const ButtonShimmer({super.key});
 
@@ -15,7 +17,7 @@ class ButtonShimmer extends StatelessWidget {
         height: 80,
         width: MediaQuery.of(context).size.width,
         decoration: const BoxDecoration(
-          color: Colors.black,
+          color: AppColors.black,
         ),
       ),
     );

@@ -39,7 +39,7 @@ class CartPage extends StatelessWidget {
                           position: badges.BadgePosition.topEnd(top: 1, end: 5),
                           badgeContent: Text(
                             totalQuantity.toString(),
-                            style: const TextStyle(color: Colors.white),
+                            style: const TextStyle(color: AppColors.white),
                           ),
                           child: IconButton(
                             onPressed: () {

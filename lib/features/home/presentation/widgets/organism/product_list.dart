@@ -53,7 +53,7 @@ class _ProductListState extends State<ProductList> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 20.0,
                     mainAxisSpacing: 20.0,
-                    childAspectRatio: 0.75,
+                    childAspectRatio: 0.7,
                   ),
                   itemCount: state.product.length,
                   itemBuilder: (context, index) {
@@ -79,11 +79,11 @@ class _ProductListState extends State<ProductList> {
   Widget _productItemCard(
       AllProductLoaded state, int index, BuildContext context) {
     return Container(
-      height: 150,
-      width: 30,
+      // height: 150,
+      // width: 30,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -103,7 +103,7 @@ class _ProductListState extends State<ProductList> {
             height: 150.0,
             fit: BoxFit.cover,
           ),
-          const SpaceHeight(height: 10),
+          const SpaceHeight(height: 4),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(

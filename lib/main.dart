@@ -12,6 +12,7 @@ import 'package:onlineshop_app/features/address/presentation/bloc/subdistrict/su
 import 'package:onlineshop_app/features/auth/data/datasource/auth_remote_datasource.dart';
 import 'package:onlineshop_app/features/auth/presentation/bloc/login/login_bloc.dart';
 import 'package:onlineshop_app/features/auth/presentation/bloc/logout/logout_bloc.dart';
+import 'package:onlineshop_app/features/auth/presentation/bloc/register/register_bloc.dart';
 import 'package:onlineshop_app/features/firebase_messaging/firebase_messaging_remote_datasource.dart';
 import 'package:onlineshop_app/features/home/data/datasources/category_remote_datasource.dart';
 import 'package:onlineshop_app/features/home/data/datasources/product_remote_datasource.dart';
@@ -73,6 +74,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (contex) => LoginBloc(AuthRemoteDatasource()),
+        ),
+        BlocProvider(
+          create: (contex) => RegisterBloc(AuthRemoteDatasource()),
         ),
         BlocProvider(
           create: (contex) => LogoutBloc(AuthRemoteDatasource()),

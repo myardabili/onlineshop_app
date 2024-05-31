@@ -2,11 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:onlineshop_app/core/components/circle_loading.dart';
 import 'package:onlineshop_app/core/components/components.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/category/category_bloc.dart';
 import 'package:onlineshop_app/features/home/presentation/bloc/product_category/product_category_bloc.dart';
+import 'package:onlineshop_app/features/home/presentation/widgets/product_shimmer.dart';
 
 import '../../../../api/urls.dart';
 import '../../../../core/constants/app_colors.dart';
@@ -50,7 +50,7 @@ class _ProductCategoryPageState extends State<ProductCategoryPage> {
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: Colors.black,
+                  color: AppColors.black,
                 ),
               );
             }
@@ -70,7 +70,10 @@ class _ProductCategoryPageState extends State<ProductCategoryPage> {
       body: BlocBuilder<ProductCategoryBloc, ProductCategoryState>(
         builder: (context, state) {
           if (state is ProductCategoryLoading) {
-            return const CircleLoading();
+            return const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              child: ProductShimmer(),
+            );
           }
           if (state is ProductCategoryLoaded) {
             return GridView.builder(
@@ -78,7 +81,7 @@ class _ProductCategoryPageState extends State<ProductCategoryPage> {
                 crossAxisCount: 2,
                 crossAxisSpacing: 20.0,
                 mainAxisSpacing: 20.0,
-                childAspectRatio: 0.75,
+                childAspectRatio: 0.7,
               ),
               padding: const EdgeInsets.all(20),
               itemCount: state.product.length,
@@ -105,11 +108,11 @@ class _ProductCategoryPageState extends State<ProductCategoryPage> {
   Widget _productItemCard(
       ProductCategoryLoaded state, int index, BuildContext context) {
     return Container(
-      height: 150,
-      width: 30,
+      // height: 150,
+      // width: 30,
       clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
@@ -129,7 +132,7 @@ class _ProductCategoryPageState extends State<ProductCategoryPage> {
             height: 150.0,
             fit: BoxFit.cover,
           ),
-          const SpaceHeight(height: 10),
+          const SpaceHeight(height: 4),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(

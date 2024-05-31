@@ -57,7 +57,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.black,
+            color: AppColors.black,
           ),
         ),
         actions: [
@@ -132,10 +132,10 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       height: 80,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
+            color: AppColors.grey.withOpacity(0.2),
             spreadRadius: 5,
             blurRadius: 7,
             offset: const Offset(0, 3), // changes position of shadow
@@ -167,7 +167,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       'Price',
                       style: TextStyle(
                         fontSize: 14,
-                        color: Colors.grey,
+                        color: AppColors.grey,
                       ),
                     ),
                     Text(
@@ -175,7 +175,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                        color: AppColors.black,
                       ),
                     ),
                   ],
@@ -197,7 +197,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     child: const Text(
                       'Add to cart',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                       ),
@@ -216,7 +216,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   Widget _detailProduct(ProductDetailLoaded state) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      color: Colors.white,
+      color: AppColors.white,
       child: Padding(
         padding: const EdgeInsets.only(top: 20.0),
         child: Column(
@@ -230,7 +230,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
-                    color: Colors.grey,
+                    color: AppColors.grey,
                   ),
                 ),
                 Text(

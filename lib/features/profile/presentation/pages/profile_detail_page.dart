@@ -31,7 +31,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: AppColors.light,
+                color: AppColors.white,
                 width: 3,
               ),
             ),

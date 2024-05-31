@@ -37,23 +37,20 @@ class AddressTile extends StatelessWidget {
                 ]
               : null,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SpaceHeight(height: 24.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SpaceHeight(height: 24.0),
+              Text(
                 '${data.name} - ${data.phone}',
                 style: const TextStyle(
                   fontSize: 16,
                 ),
               ),
-            ),
-            const SpaceHeight(height: 4.0),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: Row(
+              const SpaceHeight(height: 4.0),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Flexible(
@@ -73,18 +70,18 @@ class AddressTile extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            const SpaceHeight(height: 24.0),
-            if (isSelected) ...[
-              const Divider(color: AppColors.primary),
-              Center(
-                child: TextButton(
-                  onPressed: onEditTap,
-                  child: const Text('Edit'),
+              const SpaceHeight(height: 24.0),
+              if (isSelected) ...[
+                const Divider(color: AppColors.primary),
+                Center(
+                  child: TextButton(
+                    onPressed: onEditTap,
+                    child: const Text('Edit'),
+                  ),
                 ),
-              ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

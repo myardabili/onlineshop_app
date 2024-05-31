@@ -47,13 +47,12 @@ class _ProfilePageState extends State<ProfilePage> {
               color: AppColors.primary,
             ),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: AppColors.light,
+                      color: AppColors.white,
                       width: 3,
                     ),
                   ),
@@ -70,27 +69,28 @@ class _ProfilePageState extends State<ProfilePage> {
                 const SpaceWidth(width: 12),
                 BlocBuilder<UserBloc, UserState>(
                   builder: (context, state) {
-                    if (state is UserLoading) {
-                      return const CircleLoading();
-                    }
+                    // if (state is UserLoading) {
+                    //   return const CircleLoading();
+                    // }
                     if (state is UserLoaded) {
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            state.user.name!,
+                            state.user.name ?? '-',
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w700,
-                              color: AppColors.light,
+                              color: AppColors.white,
                             ),
                           ),
                           const SpaceHeight(height: 4),
                           Text(
-                            state.user.email!,
+                            state.user.email ?? '-',
                             style: const TextStyle(
                               fontSize: 14,
-                              color: AppColors.light,
+                              color: AppColors.white,
                             ),
                           ),
                         ],
@@ -104,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   onPressed: () {},
                   icon: const Icon(
                     Icons.edit,
-                    color: AppColors.light,
+                    color: AppColors.white,
                   ),
                 ),
               ],
@@ -204,15 +204,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 BlocConsumer<LogoutBloc, LogoutState>(
                   listener: (context, state) {
                     if (state is LogoutFailure) {
-                      context.goNamed(
-                        RouteConstants.login,
-                      );
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(state.message)));
                     }
                     if (state is LogoutLoaded) {
-                      context.goNamed(RouteConstants.root,
-                          pathParameters: PathParameters().toMap());
+                      context.goNamed(RouteConstants.login);
                     }
-                    return;
                   },
                   builder: (context, state) {
                     if (state is LogoutLoading) {
@@ -233,7 +230,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       },
                     );
                   },
-                ),
+                )
               ],
             ),
           ),

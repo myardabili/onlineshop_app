@@ -55,7 +55,8 @@ class AppRouter {
         name: RouteConstants.root,
         path: RouteConstants.rootPath,
         builder: (context, state) {
-          final tab = int.tryParse(state.pathParameters['root_tab'] ?? '') ?? 0;
+          final tab =
+              int.tryParse(state.pathParameters[':root_tab'] ?? '') ?? 0;
           return DashboardPage(
             key: state.pageKey,
             currentTab: tab,

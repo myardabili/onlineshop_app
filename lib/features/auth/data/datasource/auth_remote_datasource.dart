@@ -3,6 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:onlineshop_app/api/urls.dart';
 import 'package:onlineshop_app/features/auth/data/datasource/auth_local_datasource.dart';
 import 'package:onlineshop_app/features/auth/data/models/login_model.dart';
+import 'package:onlineshop_app/features/auth/data/models/register_model.dart';
+import 'package:onlineshop_app/features/auth/data/models/register_request_model.dart';
 
 class AuthRemoteDatasource {
   Future<Either<String, LoginModel>> login(
@@ -18,6 +20,23 @@ class AuthRemoteDatasource {
     }
   }
 
+  Future<Either<String, RegisterModel>> register(
+      RegisterRequestModel model) async {
+    final response = await http.post(
+      Uri.parse('${URLs.base}/api/register'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: model.toJson(),
+    );
+    if (response.statusCode == 201) {
+      return Right(RegisterModel.fromJson(response.body));
+    } else {
+      return const Left('Server Error');
+    }
+  }
+
   Future<Either<String, String>> logout() async {
     final authData = await AuthLocalDatasource().getAuthData();
     final response = await http.post(
@@ -27,9 +46,8 @@ class AuthRemoteDatasource {
       },
     );
     if (response.statusCode == 200) {
-      AuthLocalDatasource().removeAuthData;
+      await AuthLocalDatasource().removeAuthData();
       return Right(response.body);
-      // return Right(LoginModel.fromJson(response.body));
     } else {
       return Left(response.body);
     }

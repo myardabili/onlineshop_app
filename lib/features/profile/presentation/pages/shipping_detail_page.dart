@@ -106,7 +106,7 @@ class _ShippingDetailPageState extends State<ShippingDetailPage> {
                       ),
                       const Divider(
                         height: 1,
-                        color: AppColors.light,
+                        color: AppColors.white,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(16.0),

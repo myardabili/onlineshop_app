@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:onlineshop_app/core/components/circle_loading.dart';
 import 'package:onlineshop_app/core/extensions/int_ext.dart';
 import 'package:onlineshop_app/features/address/presentation/bloc/get_address/get_address_bloc.dart';
 
@@ -34,7 +35,7 @@ class _AddressPageState extends State<AddressPage> {
         padding: const EdgeInsets.all(20.0),
         children: [
           const Text(
-            'Pilih atau tambahkan alamat pengiriman',
+            'Select or add a shipping address',
             style: TextStyle(
               fontSize: 16,
             ),
@@ -43,9 +44,7 @@ class _AddressPageState extends State<AddressPage> {
           BlocBuilder<GetAddressBloc, GetAddressState>(
             builder: (context, state) {
               if (state is GetAddressLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
+                return const CircleLoading();
               }
               if (state is GetAddressLoaded) {
                 return BlocBuilder<CheckoutBloc, CheckoutState>(

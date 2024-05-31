@@ -63,7 +63,7 @@ class OrderCard extends StatelessWidget {
                       extra: data.id!,
                     );
                   },
-                  label: 'Lacak',
+                  label: 'Track',
                   height: 40.0,
                   width: 150.0,
                   fontSize: 16.0,

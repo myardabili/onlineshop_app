@@ -1,3 +1,3 @@
 class Variable {
-  static const rajaOngkirKey = 'APIKEY';
+  static const rajaOngkirKey = '';
 }

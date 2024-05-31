@@ -19,7 +19,7 @@ class ProductTile extends StatelessWidget {
           width: 85,
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
-            color: AppColors.light,
+            color: AppColors.white,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Image.network(

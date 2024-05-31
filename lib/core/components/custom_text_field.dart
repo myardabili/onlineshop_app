@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:onlineshop_app/core/constants/app_colors.dart';
 import 'spaces.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -45,11 +46,11 @@ class CustomTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
             border: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(5)),
-              borderSide: BorderSide(color: Colors.grey),
+              borderSide: BorderSide(color: AppColors.grey),
             ),
             enabledBorder: const OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(5)),
-              borderSide: BorderSide(color: Colors.grey),
+              borderSide: BorderSide(color: AppColors.grey),
             ),
             hintText: label,
           ),

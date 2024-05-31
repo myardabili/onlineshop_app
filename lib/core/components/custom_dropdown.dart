@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:onlineshop_app/core/constants/app_colors.dart';
 import 'spaces.dart';
 
 class CustomDropdown<T> extends StatelessWidget {
@@ -40,11 +41,11 @@ class CustomDropdown<T> extends StatelessWidget {
           decoration: const InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              borderSide: BorderSide(color: Colors.grey),
+              borderSide: BorderSide(color: AppColors.grey),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              borderSide: BorderSide(color: Colors.grey),
+              borderSide: BorderSide(color: AppColors.grey),
             ),
           ),
         ),
