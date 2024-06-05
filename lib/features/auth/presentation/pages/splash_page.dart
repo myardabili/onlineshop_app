@@ -21,7 +21,7 @@ class SplashPage extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: EdgeInsets.all(30.0),
         child: Text(
-          'Code with Bahri',
+          'E-Commerce App',
           style: TextStyle(
             color: AppColors.grey,
             fontWeight: FontWeight.w600,

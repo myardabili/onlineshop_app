@@ -104,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     if (state is LoginLoaded) {
                       AuthLocalDatasource().saveAuthData(state.data);
                       await FirebaseMessagingRemoteDatasource().initialize();
+                      context.read<UserBloc>().add(OnGetUser());
                       context.goNamed(
                         RouteConstants.root,
                         pathParameters: PathParameters().toMap(),

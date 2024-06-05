@@ -213,66 +213,6 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
     );
   }
 
-  Widget _detailProduct(ProductDetailLoaded state) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      color: AppColors.white,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  categoryMap[state.product.categoryId] ?? '',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.grey,
-                  ),
-                ),
-                Text(
-                  isAvailable[state.product.isAvailable] ?? '-',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.primary,
-                  ),
-                ),
-              ],
-            ),
-            const SpaceHeight(height: 8.0),
-            Text(
-              state.product.name!,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SpaceHeight(height: 30.0),
-            const Text(
-              'Description',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SpaceHeight(height: 20.0),
-            Text(
-              state.product.description!,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget _imageProduct(ProductDetailLoaded state) {
     return Container(
       width: MediaQuery.of(context).size.width,

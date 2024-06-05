@@ -273,36 +273,6 @@ class PaymentDetailPage extends StatelessWidget {
             ],
           ),
           const SpaceHeight(height: 5.0),
-          Row(
-            children: [
-              const Text(
-                'Shipping Cost',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Spacer(),
-              BlocBuilder<CheckoutBloc, CheckoutState>(
-                builder: (context, state) {
-                  if (state is CheckoutLoaded) {
-                    final shippingCost = state.shippingCost;
-                    return Text(
-                      shippingCost.currencyFormatRp,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w600,
-                      ),
-                    );
-                  }
-                  return Text(
-                    0.currencyFormatRp,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
           const SpaceHeight(height: 8.0),
           const Divider(),
           const SpaceHeight(height: 24.0),
@@ -350,61 +320,6 @@ class PaymentDetailPage extends StatelessWidget {
               ],
             ),
             const SpaceHeight(height: 20.0),
-            BlocBuilder<CheckoutBloc, CheckoutState>(
-              builder: (context, state) {
-                if (state is CheckoutLoaded) {
-                  final paymentMethod = state.paymentMethod;
-                  return BlocListener<OrderBloc, OrderState>(
-                    listener: (context, orderState) {
-                      if (orderState is OrderLoaded) {
-                        context.pushNamed(
-                          RouteConstants.paymentWaiting,
-                          pathParameters: PathParameters().toMap(),
-                          extra: orderState.orderModel.order!.id!,
-                        );
-                      }
-                      if (orderState is OrderFailure) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          backgroundColor: AppColors.red,
-                          content: Text(orderState.message),
-                        ));
-                      }
-                    },
-                    child: BlocBuilder<OrderBloc, OrderState>(
-                      builder: (context, orderState) {
-                        if (orderState is OrderLoading) {
-                          return const CircleLoading();
-                        }
-                        return Button.filled(
-                          disabled: paymentMethod == '',
-                          onPressed: () {
-                            context.read<OrderBloc>().add(OnOrder(
-                                  addressId: state.addressId,
-                                  paymentMethod: paymentMethod,
-                                  shippingService: state.shippingService,
-                                  shippingCost: state.shippingCost,
-                                  paymentVaName: state.paymentVaName,
-                                  products: state.items,
-                                ));
-                          },
-                          label: 'Pay Now',
-                        );
-                      },
-                    ),
-                  );
-                }
-                return Button.filled(
-                  disabled: false,
-                  onPressed: () {
-                    context.pushNamed(
-                      RouteConstants.paymentWaiting,
-                      pathParameters: PathParameters().toMap(),
-                    );
-                  },
-                  label: 'Pay Now',
-                );
-              },
-            ),
           ],
         ),
       ),
