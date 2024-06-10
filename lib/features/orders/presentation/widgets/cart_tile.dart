@@ -41,4 +41,96 @@ class CartTile extends StatelessWidget {
       ),
     );
   }
+
+  Widget _productInfo(BuildContext context) {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            data.product.name!,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SpaceHeight(height: 4),
+          Text(
+            'Qty: ${data.quantity}',
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SpaceHeight(height: 4),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                data.product.price!.currencyFormatRp,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const Spacer(),
+              _buttonQty(context),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buttonQty(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+          child: InkWell(
+            onTap: () {
+              context.read<CheckoutBloc>().add(RemoveItem(item: data.product));
+            },
+            child: const ColoredBox(
+              color: AppColors.primary,
+              child: Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Icon(
+                  Icons.remove,
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SpaceWidth(width: 4.0),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text('${data.quantity}'),
+        ),
+        const SpaceWidth(width: 4.0),
+        ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+          child: InkWell(
+            onTap: () {
+              context.read<CheckoutBloc>().add(AddItem(item: data.product));
+            },
+            child: const ColoredBox(
+              color: AppColors.primary,
+              child: Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Icon(
+                  Icons.add,
+                  color: AppColors.white,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
 }

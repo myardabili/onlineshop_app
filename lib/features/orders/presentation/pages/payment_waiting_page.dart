@@ -138,5 +138,185 @@ class _PaymentWaitingPageState extends State<PaymentWaitingPage> {
   }
 
   @override
-  
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Waiting for payment'),
+      ),
+      body: BlocListener<CheckPaymentStatusBloc, CheckPaymentStatusState>(
+        listener: (context, state) {
+          if (state is CheckPaymentStatusLoaded) {
+            if (state.status == 'paid') {
+              _timer?.cancel();
+              context.read<CheckoutBloc>().add(Started());
+              onTimerCompletion();
+            }
+          }
+        },
+        child: ListView(
+          padding: const EdgeInsets.all(20.0),
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.schedule),
+                const SpaceWidth(width: 12.0),
+                const Flexible(
+                  child: Text(
+                    'Complete Inner Payment',
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SpaceWidth(width: 12.0),
+                CountdownTimer(
+                  minute: 1,
+                  onTimerCompletion: onTimerCompletion,
+                ),
+              ],
+            ),
+            const SpaceHeight(height: 20.0),
+            BlocBuilder<OrderBloc, OrderState>(
+              builder: (context, state) {
+                if (state is OrderLoading) {
+                  return const CircleLoading();
+                }
+                if (state is OrderLoaded) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        banks
+                            .where((element) =>
+                                element.code ==
+                                state.orderModel.order!.paymentVaName!)
+                            .first
+                            .name,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Image.asset(
+                        height: 100,
+                        width: 100,
+                        banks
+                            .where((element) =>
+                                element.code ==
+                                state.orderModel.order!.paymentVaName!)
+                            .first
+                            .image,
+                      ),
+                    ],
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+            const SpaceHeight(height: 14.0),
+            const Divider(),
+            const SpaceHeight(height: 14.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'No Virtual Account',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    BlocBuilder<OrderBloc, OrderState>(
+                      builder: (context, state) {
+                        if (state is OrderLoaded) {
+                          return Text(
+                            state.orderModel.order!.paymentVaNumber!,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      },
+                    ),
+                  ],
+                ),
+                Button.outlined(
+                  textColor: AppColors.primary,
+                  width: 125.0,
+                  onPressed: () {
+                    Clipboard.setData(const ClipboardData(text: 'test dong'))
+                        .then((_) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Copied to clipboard'),
+                        duration: Duration(seconds: 1),
+                        backgroundColor: AppColors.primary,
+                      ));
+                    });
+                  },
+                  label: 'Copy',
+                  icon: Assets.icons.copy.svg(),
+                ),
+              ],
+            ),
+            const SpaceHeight(height: 14.0),
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: const Text(
+                'Total Price',
+                style: TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              subtitle: BlocBuilder<OrderBloc, OrderState>(
+                builder: (context, state) {
+                  if (state is OrderLoaded) {
+                    return Text(
+                      state.orderModel.order!.totalCost!.currencyFormatRp,
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Button.filled(
+              onPressed: () {
+                context.goNamed(
+                  RouteConstants.root,
+                  pathParameters: PathParameters().toMap(),
+                );
+              },
+              label: 'Shopping Again',
+            ),
+            const SpaceHeight(height: 20.0),
+            Button.outlined(
+              onPressed: () {
+                context.pushNamed(
+                  RouteConstants.trackingOrder,
+                  pathParameters: PathParameters().toMap(),
+                );
+              },
+              label: 'Check Payment Status',
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

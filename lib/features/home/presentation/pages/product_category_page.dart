@@ -104,4 +104,59 @@ class _ProductCategoryPageState extends State<ProductCategoryPage> {
       ),
     );
   }
+
+  Widget _productItemCard(
+      ProductCategoryLoaded state, int index, BuildContext context) {
+    return Container(
+      // height: 150,
+      // width: 30,
+      clipBehavior: Clip.antiAlias,
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withOpacity(0.2),
+            blurRadius: 6,
+          ),
+        ],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Image.network(
+            state.product[index].image!.contains('http')
+                ? state.product[index].image!
+                : '${URLs.baseUrlImage}${state.product[index].image}',
+            width: MediaQuery.of(context).size.width,
+            height: 150.0,
+            fit: BoxFit.cover,
+          ),
+          const SpaceHeight(height: 4),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              state.product[index].name!,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          const SpaceHeight(height: 4),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              state.product[index].price!.currencyFormatRp,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

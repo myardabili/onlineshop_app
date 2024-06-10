@@ -29,6 +29,36 @@ class ProductTile extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+        const SpaceWidth(width: 12),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              data.product!.name!,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SpaceHeight(height: 4),
+            Text(
+              'Qty: ${data.quantity}',
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            const SpaceHeight(height: 4),
+            Text(
+              data.product!.price!.currencyFormatRp,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
       ],
     );
   }

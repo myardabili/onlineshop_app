@@ -122,3 +122,78 @@ class CartPage extends StatelessWidget {
     );
   }
 
+  BlocBuilder<CheckoutBloc, CheckoutState> _buttonCheckout() {
+    return BlocBuilder<CheckoutBloc, CheckoutState>(
+      builder: (context, state) {
+        if (state is CheckoutLoaded) {
+          final totalQty = state.items.fold<int>(
+              0, (previousValue, element) => previousValue + element.quantity);
+          return Button.filled(
+            disabled: totalQty == 0,
+            onPressed: () async {
+              final isAuth = await AuthLocalDatasource().isAuth();
+              if (!isAuth) {
+                context.pushNamed(
+                  RouteConstants.login,
+                );
+              } else {
+                context.goNamed(
+                  RouteConstants.address,
+                  pathParameters: PathParameters(
+                    rootTab: RootTab.order,
+                  ).toMap(),
+                );
+              }
+            },
+            label: 'Checkout ($totalQty)',
+          );
+        }
+        return Button.filled(
+          disabled: false,
+          onPressed: () {},
+          label: 'Checkout (0)',
+        );
+      },
+    );
+  }
+
+  Widget _totalPrice() {
+    return Row(
+      children: [
+        const Text(
+          'Total',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const Spacer(),
+        BlocBuilder<CheckoutBloc, CheckoutState>(
+          builder: (context, state) {
+            if (state is CheckoutLoaded) {
+              final totalPrice = state.items.fold<int>(
+                  0,
+                  (previousValue, element) =>
+                      previousValue +
+                      (element.quantity * element.product.price!));
+              return Text(
+                totalPrice.currencyFormatRp,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              );
+            }
+            return Text(
+              0.currencyFormatRp,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+}
